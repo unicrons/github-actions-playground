@@ -1,0 +1,92 @@
+name: Pipeline Orchestrator
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  pipeline-scan:
+    uses: ./.github/workflows/01-pipeline-scan.yml
+
+  code-analysis:
+    needs: pipeline-scan
+    uses: ./.github/workflows/02-code-analysis.yml
+
+  secrets-detection:
+    needs: pipeline-scan
+    uses: ./.github/workflows/03-secrets-detection.yml
+
+  iac-scan:
+    needs: pipeline-scan
+    uses: ./.github/workflows/06-iac-scan.yml
+
+  build:
+    needs: [code-analysis, secrets-detection]
+    uses: ./.github/workflows/04-build.yml
+
+  container-scan:
+    needs: build
+    uses: ./.github/workflows/05-container-scan.yml
+    with:
+      image-digest: ${{ needs.build.outputs.image-digest }}
+
+  deploy-infrastructure:
+    needs: iac-scan
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/07-deploy-infrastructure.yml
+    with:
+      environment: staging
+
+  deploy-application:
+    needs: [container-scan, deploy-infrastructure]
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/08-deploy-application.yml
+    with:
+      environment: staging
+      image-digest: ${{ needs.build.outputs.image-digest }}
+
+  runtime-testing:
+    needs: deploy-application
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/09-runtime-testing.yml
+    with:
+      environment: staging
+      app-url: https://workshop-app-staging.example.com
+
+  deploy-production:
+    needs: runtime-testing
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/08-deploy-application.yml
+    with:
+      environment: production
+      image-digest: ${{ needs.build.outputs.image-digest }}
+
+  pipeline-summary:
+    name: Pipeline Summary
+    runs-on: ubuntu-latest
+    needs:
+      [
+        pipeline-scan,
+        code-analysis,
+        secrets-detection,
+        iac-scan,
+        build,
+        container-scan,
+      ]
+    if: always()
+    steps:
+      - name: Pipeline Results Summary
+        run: |
+          echo "🎯 Perfect Pipeline Workshop - Results Summary"
+          echo "============================================"
+          echo "Pipeline Scan: ${{ needs.pipeline-scan.outputs.scan-result }}"
+          echo "SAST: ${{ needs.code-analysis.outputs.sast-result }}"
+          echo "SCA: ${{ needs.code-analysis.outputs.sca-result }}"
+          echo "Secrets: ${{ needs.secrets-detection.outputs.secrets-result }}"
+          echo "IaC Scan: ${{ needs.iac-scan.outputs.iac-result }}"
+          echo "Container Scan: ${{ needs.container-scan.outputs.scan-result }}"
+          echo "============================================"
+          echo "🎓 Workshop completed! Review the security findings above."
