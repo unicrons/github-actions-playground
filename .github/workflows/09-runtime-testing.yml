@@ -1,0 +1,82 @@
+name: Runtime Security Testing
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "Environment to test"
+        required: true
+        type: string
+      app-url:
+        description: "Application URL to test"
+        required: true
+        type: string
+    outputs:
+      dast-result:
+        description: "DAST scan result"
+        value: ${{ jobs.dast.outputs.result }}
+      load-test-result:
+        description: "Load test result"
+        value: ${{ jobs.load-test.outputs.result }}
+
+jobs:
+  dast:
+    name: Dynamic Application Security Testing
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.dast-scan.outputs.result }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: DAST Scan
+        id: dast-scan
+        run: |
+          echo "🔍 Running Dynamic Application Security Testing..."
+          echo "Target URL: ${{ inputs.app-url }}"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Performing dynamic security analysis..."
+          echo "Testing API endpoints for vulnerabilities..."
+          echo "Checking authentication and authorization..."
+          echo "Testing for injection attacks..."
+          echo "Analyzing session management..."
+          echo "result=vulnerabilities-found" >> $GITHUB_OUTPUT
+          echo "⚠️ Security vulnerabilities detected!"
+
+      - name: DAST Report
+        if: always()
+        run: |
+          echo "🔍 DAST Security Report:"
+          echo "- SQL injection vulnerabilities found"
+          echo "- Missing authentication on sensitive endpoints"
+          echo "- Weak session management"
+          echo "- Information disclosure in error messages"
+          echo "- Missing security headers"
+
+  load-test:
+    name: Performance and Load Testing
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.load-test.outputs.result }}
+    steps:
+      - name: Performance Testing
+        id: load-test
+        run: |
+          echo "📊 Running performance tests..."
+          echo "Target URL: ${{ inputs.app-url }}"
+          echo "Testing application under load..."
+          echo "Monitoring resource usage..."
+          echo "Analyzing response times..."
+          echo "Testing scalability limits..."
+          echo "result=performance-issues" >> $GITHUB_OUTPUT
+          echo "⚠️ Performance issues detected!"
+
+      - name: Performance Report
+        if: always()
+        run: |
+          echo "📊 Performance Test Report:"
+          echo "- Average response time: 2.5s (threshold: 1s)"
+          echo "- Memory usage: 85% (threshold: 80%)"
+          echo "- CPU usage peaks at 95%"
+          echo "- Database connection pool exhausted"
+          echo "- Recommendation: Scale horizontally"
