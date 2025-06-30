@@ -1,0 +1,77 @@
+# =============================================================================
+# CLAWS PIPELINE SCAN JOB
+# =============================================================================
+#
+# Repository: https://github.com/Betterment/claws
+#
+# TO USE THIS JOB:
+# 1. Copy this entire job definition into .github/workflows/01-pipeline-scan.yml
+# 2. Place it under the "jobs:" section
+# 3. Ensure you have a claws-config.yml file in workshop/pipeline_scan/
+# 4. The job will automatically scan all workflows in .github/workflows/
+# =============================================================================
+
+pipeline-scan-claws:
+  name: Analyze Github Workflows
+  runs-on: ubuntu-latest
+  steps:
+    # Set up Ruby environment (required for Claws)
+    - name: Set Up Ruby
+      uses: ruby/setup-ruby@d8d83c3960843afb664e821fed6be52f37da5267 # v1.231.0
+      with:
+        ruby-version: "3.3"
+
+    # Checkout the repository with full history
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Copy the Claws configuration file to temporary location
+    - name: Set Up Claws Config
+      run: |
+        cp workshop/pipeline_scan/claws-config.yml /tmp/claws-config.yml
+
+    # Install Shellcheck (dependency for Claws)
+    - name: Set Up Shellcheck
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y shellcheck
+
+    # Install the Claws security scanner
+    - name: Set Up Claws
+      run: |
+        gem install claws-scan -v 0.7.5
+
+    # Run security analysis on all workflow files
+    - name: Analyze Workflows
+      run: |
+        #!/bin/bash
+
+        echo "🔍 Starting workflow security analysis..."
+
+        # Find all workflow files in .github/workflows directory
+        workflow_files=$(find .github/workflows -type f)
+
+        # Check if any workflow files exist
+        if [[ -z "$workflow_files" ]]; then
+          echo "⚠️  No workflow files found in .github/workflows"
+          echo "   Make sure your workflows are in the correct directory"
+          exit 0
+        fi
+
+        # Prepare command flags for each workflow file
+        flags=()
+        echo "📁 Found workflow files:"
+
+        while IFS= read -r file; do
+          echo "   - $file"
+          flags+=("-t" "$file")
+        done <<< "$workflow_files"
+
+        echo ""
+        echo "🚀 Running Claws security analysis..."
+
+        # Execute the security analysis
+        analyze -f github -c /tmp/claws-config.yml "${flags[@]}"
+
+        echo "✅ Analysis complete!"

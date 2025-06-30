@@ -6,28 +6,14 @@ on:
   pull_request:
     branches: [main]
   workflow_call:
-    outputs:
-      scan-result:
-        description: "Pipeline scan result"
-        value: ${{ jobs.pipeline-scan.outputs.result }}
 
 jobs:
   pipeline-scan:
-    name: Pipeline Security Analysis
+    name: Analyze Github Workflows
     runs-on: ubuntu-latest
-    outputs:
-      result: ${{ steps.scan.outputs.result }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Pipeline Security Analysis
-        id: scan
+      - name: to_remove
+        id: to_remove
         run: |
-          echo "🔍 Scanning pipeline configuration for security issues..."
-          echo "Checking for secrets in workflow files..."
-          echo "Validating permissions and security settings..."
-          echo "Analyzing workflow dependencies..."
-          echo "Checking for dangerous actions usage..."
-          echo "result=passed" >> $GITHUB_OUTPUT
-          echo "✅ Pipeline scan completed"
+          echo "Copy here the workflow of the pipeline scan tool you want to use.
+          Inside workshop/pipeline_scan/{tool}/workflow.yml"
