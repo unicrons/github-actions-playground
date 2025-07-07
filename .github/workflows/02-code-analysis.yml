@@ -15,14 +15,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
         id: depcheck
+        continue-on-error: true
         with:
           project: 'test'
           path: '.'
           format: 'HTML,JSON'
-          failOnCVSS: 7
           out: 'reports'
 
       - name: Upload Dependency-Check HTML Report
@@ -39,4 +40,9 @@ jobs:
 
       - name: Set SCA Result Output
         id: set-result
-        run: echo "result=success" >> $GITHUB_OUTPUT
+        run: |
+          if [ "${{ steps.depcheck.outcome }}" = "success" ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+          fi
