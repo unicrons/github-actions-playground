@@ -48,10 +48,10 @@ jobs:
       environment: staging
       image-digest: ${{ needs.build.outputs.image-digest }}
 
-  runtime-testing:
+  runtime-infra-scan:
     needs: deploy-application
     if: github.ref == 'refs/heads/main'
-    uses: ./.github/workflows/09-runtime-testing.yml
+    uses: ./.github/workflows/09-runtime-infra-scan.yml
     with:
       environment: staging
       app-url: https://workshop-app-staging.example.com
