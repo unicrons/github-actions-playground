@@ -1,14 +1,14 @@
 # =============================================================================
-# CLAWS PIPELINE SCAN JOB
+# CHECKOV IAC SCAN JOB
 # =============================================================================
 #
 # Repository: https://github.com/bridgecrewio/checkov
 #
 # TO USE THIS JOB:
-# 1. Copy this entire job definition into .github/workflows/01-pipeline-scan.yml
+# 1. Copy this entire job definition into .github/workflows/06-iac-scan.yml
 # 2. Place it under the "jobs:" section
-# 3. Ensure you have a claws-config.yml file in workshop/pipeline_scan/
-# 4. The job will automatically scan all workflows in .github/workflows/
+# 3. Ensure you have a checkov-config.yml file in workshop/iac_scan/checkov/
+# 4. The job will automatically scan all terraform files in infra/
 # =============================================================================
 
 pipeline-scan-checkov:
@@ -21,8 +21,8 @@ pipeline-scan-checkov:
         fetch-depth: 0
 
     # Run Checkov on all workflow files
-    - name: Checkov GitHub Actions Scan
+    - name: Checkov Scan
       uses: bridgecrewio/checkov-action@v12.2776.0
       with:
-        directory: .github/workflows/
-        framework: github_workflow
+        directory: infra/
+        framework: terraform
