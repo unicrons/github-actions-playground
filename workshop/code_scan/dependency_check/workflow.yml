@@ -1,0 +1,35 @@
+# =============================================================================
+# DEPENDENCY CHECK CODE SCAN JOB
+# =============================================================================
+#
+# Repository: https://github.com/dependency-check/dependencycheck
+#
+# TO USE THIS JOB:
+# 1. Copy this entire job definition into .github/workflows/02-code-analysis.yml
+# 2. Place it under the "jobs:" section
+# 3. The job will automatically scan all code in the code/ directory
+# =============================================================================
+
+dependency_check:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Depcheck
+      uses: dependency-check/Dependency-Check_Action@main
+      id: Depcheck
+      with:
+        project: 'code'
+        path: './code'
+        format: 'HTML'
+        args: >
+          --failOnCVSS 7
+          --enableRetired
+
+    - name: Upload Test results
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+          name: Depcheck report
+          path: ${{github.workspace}}/reports
