@@ -1,0 +1,28 @@
+# =============================================================================
+# CLAWS PIPELINE SCAN JOB
+# =============================================================================
+#
+# Repository: https://github.com/bridgecrewio/checkov
+#
+# TO USE THIS JOB:
+# 1. Copy this entire job definition into .github/workflows/01-pipeline-scan.yml
+# 2. Place it under the "jobs:" section
+# 3. Ensure you have a claws-config.yml file in workshop/pipeline_scan/
+# 4. The job will automatically scan all workflows in .github/workflows/
+# =============================================================================
+
+pipeline-scan-checkov:
+  name: Analyze Github Workflows with Checkov
+  runs-on: ubuntu-latest
+  steps:
+    # Checkout the repository with full history
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Run Checkov on all workflow files
+    - name: Checkov GitHub Actions Scan
+      uses: bridgecrewio/checkov-action@v12.2776.0
+      with:
+        directory: .github/workflows/
+        framework: github_workflow
