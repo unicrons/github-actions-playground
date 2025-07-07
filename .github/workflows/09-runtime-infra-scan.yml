@@ -20,7 +20,7 @@ on:
         value: ${{ jobs.load-test.outputs.result }}
 
 jobs:
-  runtime-infra-scan
+  runtime-infra-scan:
     name: Runtime Infrastructure Scan
     runs-on: ubuntu-latest
     steps:
