@@ -23,7 +23,7 @@ jobs:
         with:
           project: 'test'
           path: '.'
-          format: 'HTML,JSON'
+          format: 'HTML'
           out: 'reports'
 
       - name: Upload Dependency-Check HTML Report
@@ -31,12 +31,6 @@ jobs:
         with:
           name: dependency-check-report-html
           path: reports/dependency-check-report.html
-
-      - name: Upload Dependency-Check JSON Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: dependency-check-report-json
-          path: reports/dependency-check-report.json
 
       - name: Set SCA Result Output
         id: set-result
