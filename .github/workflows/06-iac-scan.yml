@@ -8,12 +8,18 @@ on:
         value: ${{ jobs.iac-scan.outputs.result }}
 
 jobs:
-  iac-scan:
-    name: Infrastructure Security Scan
+  pipeline-scan-checkov:
+    name: Analyze Github Workflows with Checkov
     runs-on: ubuntu-latest
     steps:
-      - name: to_remove
-        id: to_remove
-        run: |
-          echo "Copy here the workflow of the IaC scan tool you want to use.
-          Inside workshop/iac_scan/{tool}/workflow.yml"
+      # Checkout the repository with full history
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Run Checkov on all workflow files
+      - name: Checkov GitHub Actions Scan
+        uses: bridgecrewio/checkov-action@v12.2776.0
+        with:
+          directory: .github/workflows/
+          framework: github_workflow
