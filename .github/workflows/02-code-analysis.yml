@@ -3,60 +3,39 @@ name: Code Security Analysis
 on:
   workflow_call:
     outputs:
-      sast-result:
-        description: "SAST scan result"
-        value: ${{ jobs.sast.outputs.result }}
       sca-result:
         description: "SCA scan result"
-        value: ${{ jobs.sca.outputs.result }}
+        value: ${{ jobs.dependency_check.outputs.result }}
 
 jobs:
-  sast:
-    name: Static Application Security Testing
+  dependency_check:
     runs-on: ubuntu-latest
     outputs:
-      result: ${{ steps.sast-scan.outputs.result }}
+      result: ${{ steps.set-result.outputs.result }}
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Run OWASP Dependency-Check
+        uses: jeremylong/dependency-check-action@v12
         with:
-          node-version: "18"
+          project: ${{ github.repository }}
+          args: '--scan ./code --format HTML --format JSON --enableExperimental'
+          reportFormat: "HTML,JSON"
+          failOnCVSS: 7 # Example: fail if any vulnerability has a CVSS score >= 7
 
-      - name: SAST Analysis
-        id: sast-scan
-        run: |
-          echo "🔍 Running Static Application Security Testing..."
-          echo "Analyzing code for security vulnerabilities..."
-          echo "Checking for common security patterns..."
-          echo "Scanning for hardcoded secrets..."
-          echo "Analyzing authentication flows..."
-          echo "result=vulnerabilities-found" >> $GITHUB_OUTPUT
-          echo "✅ SAST analysis completed"
-
-  sca:
-    name: Software Composition Analysis
-    runs-on: ubuntu-latest
-    outputs:
-      result: ${{ steps.sca-scan.outputs.result }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Upload Dependency-Check HTML Report
+        uses: actions/upload-artifact@v4
         with:
-          node-version: "18"
+          name: dependency-check-report-html
+          path: dependency-check-report.html
 
-      - name: SCA Analysis
-        id: sca-scan
-        run: |
-          echo "📦 Running Software Composition Analysis..."
-          echo "Scanning dependencies for known vulnerabilities..."
-          echo "Checking for outdated packages..."
-          echo "Analyzing license compliance..."
-          echo "Detecting supply chain risks..."
-          echo "result=critical-vulnerabilities" >> $GITHUB_OUTPUT
-          echo "✅ SCA analysis completed"
+      - name: Upload Dependency-Check JSON Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report-json
+          path: dependency-check-report.json
+
+      - name: Set SCA Result Output
+        id: set-result
+        run: echo "result=success" >> $GITHUB_OUTPUT
