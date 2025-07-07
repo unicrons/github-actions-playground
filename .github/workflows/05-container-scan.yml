@@ -16,31 +16,9 @@ jobs:
   container-scan:
     name: Container Vulnerability Scan
     runs-on: ubuntu-latest
-    outputs:
-      result: ${{ steps.scan.outputs.result }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Container vulnerability scan
-        id: scan
+      - name: to_remove
+        id: to_remove
         run: |
-          echo "🐳 Scanning container image for vulnerabilities..."
-          echo "Image digest: ${{ inputs.image-digest }}"
-          echo "Checking base image security..."
-          echo "Analyzing container configuration..."
-          echo "Scanning for malware..."
-          echo "Checking for exposed ports..."
-          echo "Validating user permissions..."
-          echo "result=high-vulnerabilities" >> $GITHUB_OUTPUT
-          echo "⚠️ High severity vulnerabilities found!"
-
-      - name: Container Security Report
-        if: always()
-        run: |
-          echo "🔍 Container Security Report:"
-          echo "- Base image vulnerabilities: 15 critical, 23 high"
-          echo "- Exposed sensitive files detected"
-          echo "- Running as root user"
-          echo "- Unnecessary packages installed"
-          echo "- Missing security updates"
+          echo "Copy here the workflow of the container scan tool you want to use.
+          Inside workshop/container_scan/{tool}/workflow.yml"

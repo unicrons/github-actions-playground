@@ -1,0 +1,31 @@
+name: Runtime Security Testing
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "Environment to test"
+        required: true
+        type: string
+      app-url:
+        description: "Application URL to test"
+        required: true
+        type: string
+    outputs:
+      dast-result:
+        description: "DAST scan result"
+        value: ${{ jobs.dast.outputs.result }}
+      load-test-result:
+        description: "Load test result"
+        value: ${{ jobs.load-test.outputs.result }}
+
+jobs:
+  runtime-infra-scan
+    name: Runtime Infrastructure Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: to_remove
+        id: to_remove
+        run: |
+          echo "Copy here the workflow of the runtime infrastructure scan tool you want to use.
+          Inside workshop/runtime_infra_scan/{tool}/workflow.yml"

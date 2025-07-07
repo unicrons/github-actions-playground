@@ -9,49 +9,11 @@ on:
 
 jobs:
   iac-scan:
-    name: Terraform Security Scan
+    name: Infrastructure Security Scan
     runs-on: ubuntu-latest
-    outputs:
-      result: ${{ steps.scan.outputs.result }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.5.0"
-
-      - name: Terraform Init
+      - name: to_remove
+        id: to_remove
         run: |
-          cd infra
-          echo "🏗️ Initializing Terraform..."
-          echo "terraform init"
-
-      - name: Terraform Validate
-        run: |
-          cd infra
-          echo "✅ Validating Terraform configuration..."
-          echo "terraform validate"
-
-      - name: Terraform Security Scan
-        id: scan
-        run: |
-          echo "🔍 Scanning Terraform configurations..."
-          echo "Checking for security misconfigurations..."
-          echo "Validating resource permissions..."
-          echo "Analyzing network security settings..."
-          echo "Checking encryption settings..."
-          echo "Validating IAM policies..."
-          echo "result=critical-issues" >> $GITHUB_OUTPUT
-          echo "❌ Critical security issues found!"
-
-      - name: IaC Security Report
-        if: always()
-        run: |
-          echo "📋 Infrastructure Security Report:"
-          echo "- S3 buckets without encryption"
-          echo "- Overly permissive security groups (0.0.0.0/0)"
-          echo "- Missing state encryption"
-          echo "- Hardcoded credentials detected"
-          echo "- No state locking configured"
+          echo "Copy here the workflow of the IaC scan tool you want to use.
+          Inside workshop/iac_scan/{tool}/workflow.yml"
