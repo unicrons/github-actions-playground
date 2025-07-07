@@ -48,7 +48,7 @@ jobs:
       environment: staging
       image-digest: ${{ needs.build.outputs.image-digest }}
 
-  runtime-testing:
+  runtime-infra-scan:
     needs: deploy-application
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/09-runtime-infra-scan.yml
