@@ -18,8 +18,8 @@ jobs:
           fetch-depth: 0
 
       # Run Checkov on all workflow files
-      - name: Checkov GitHub Actions Scan
+      - name: Checkov Scan
         uses: bridgecrewio/checkov-action@v12.2776.0
         with:
-          directory: .github/workflows/
-          framework: github_workflow
+          directory: infra/
+          framework: terraform
