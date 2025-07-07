@@ -13,28 +13,29 @@ jobs:
     outputs:
       result: ${{ steps.set-result.outputs.result }}
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Run OWASP Dependency-Check
-        uses: jeremylong/dependency-check-action@v12
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@main
+        id: depcheck
         with:
-          project: ${{ github.repository }}
-          args: '--scan ./code --format HTML --format JSON --enableExperimental'
-          reportFormat: "HTML,JSON"
-          failOnCVSS: 7 # Example: fail if any vulnerability has a CVSS score >= 7
+          project: 'test'
+          path: '.'
+          format: 'HTML,JSON'
+          failOnCVSS: 7
+          out: 'reports'
 
       - name: Upload Dependency-Check HTML Report
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report-html
-          path: dependency-check-report.html
+          path: reports/dependency-check-report.html
 
       - name: Upload Dependency-Check JSON Report
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report-json
-          path: dependency-check-report.json
+          path: reports/dependency-check-report.json
 
       - name: Set SCA Result Output
         id: set-result
