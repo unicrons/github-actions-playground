@@ -7,8 +7,7 @@
 # TO USE THIS JOB:
 # 1. Copy this entire job definition into .github/workflows/06-iac-scan.yml
 # 2. Place it under the "jobs:" section
-# 3. Ensure you have a checkov-config.yml file in workshop/iac_scan/checkov/
-# 4. The job will automatically scan all terraform files in infra/
+# 3. The job will automatically scan all terraform files in infra/
 # =============================================================================
 
 pipeline-scan-checkov:
