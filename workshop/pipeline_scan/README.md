@@ -2,9 +2,11 @@
 
 This workshop module focuses on scanning the pipeline configuration itself for security vulnerabilities and misconfigurations.
 
-## What is Pipeline Security Scanning?
+## Why is Pipeline Security important?
 
-Pipeline security scanning analyzes your CI/CD workflows, configurations, and automation scripts to identify security risks in your deployment process. This is crucial because compromised pipelines can lead to supply chain attacks.
+Many organizations overlook the pipeline as a potential attack surface. Malicious actors know that compromising your CI/CD system can grant them access to source code, privileged credentials, and even the ability to inject malicious code into your production systems without being detected by application security tools.
+
+Pipeline security scanning analyzes your CI/CD workflows, configurations, and automation scripts to identify security risks in your deployment process.
 
 ## Common Pipeline Security Issues
 
@@ -16,10 +18,7 @@ Pipeline security scanning analyzes your CI/CD workflows, configurations, and au
 
 ## Tools Used in This Module
 
-- **GitHub Security Tab** - Built-in secret scanning
-- **actionlint** - GitHub Actions workflow linter
-- **semgrep** - Static analysis for CI/CD configurations
-- **Custom Scripts** - Organization-specific policy checks
+- [**claws**](https://github.com/Betterment/claws) - Claws is a static analysis tool to help you write safer Github Workflows.
 
 ## Learning Objectives
 
@@ -44,3 +43,7 @@ By the end of this module, you will:
 - [ ] Secure triggers and conditions
 - [ ] Environment protection rules
 - [ ] Audit logging enabled
+
+
+### References
+- [GitHub Action tj-actions/changed-files supply chain attack: everything you need to know](https://www.wiz.io/blog/github-action-tj-actions-changed-files-supply-chain-attack-cve-2025-30066): A supply chain attack on popular GitHub Action tj-actions/changed-files caused many repositories to leak their secrets.
