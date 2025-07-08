@@ -1,6 +1,6 @@
 # Pipeline Security Scan
 
-This workshop module focuses on scanning the CI/CD pipeline configuration itself for security vulnerabilities and misconfigurations.
+This workshop module focuses on scanning the pipeline configuration itself for security vulnerabilities and misconfigurations.
 
 ## What is Pipeline Security Scanning?
 

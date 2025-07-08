@@ -37,6 +37,9 @@ The workshop is organized into different modules, each focusing on a specific as
 
 ## 📚 Workshop Modules
 
+### 0. 🐦‍🔥 [Introduction](workshop/)
+Workshop introduction and overview.
+
 ### 1. 🔍 [Pipeline Security Scan](workshop/pipeline_scan/)
 Learn to scan CI/CD pipelines for security misconfigurations and vulnerabilities.
 
