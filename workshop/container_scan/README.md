@@ -1,12 +1,13 @@
 # Container Security Scanning
 
-This workshop module covers container security scanning to identify vulnerabilities in Docker images, base images, and container configurations.
+This workshop module covers container security scanning to identify vulnerabilities in container images and configurations.
 
-## What is Container Security Scanning?
+## Why is Container Security important?
+Containers are now one of the most common ways to deploy applications. They are also a common target for attackers, as they can be used to gain access to the underlying infrastructure, access to secrets (including cloud credentials) or run arbitrary code.
 
-Container security scanning analyzes Docker images and container configurations to identify security vulnerabilities, misconfigurations, and compliance issues before deployment to production environments.
+Container security scanning analyzes images and container configurations to identify security vulnerabilities, misconfigurations, and compliance issues before releasing them..
 
-## Container Security Concerns
+## Common Container Security Issues
 
 ### Image Vulnerabilities:
 1. **Base Image CVEs** - Known vulnerabilities in base operating systems
@@ -25,7 +26,7 @@ Container security scanning analyzes Docker images and container configurations 
 2. **Supply Chain** - Untrusted base images
 3. **Access Control** - Improper registry permissions
 
-## Tools Used in This Module
+## Tools Used in This Module #TODO: Update this section
 
 ### Vulnerability Scanners:
 - **Trivy** - Comprehensive vulnerability scanner
@@ -42,12 +43,6 @@ Container security scanning analyzes Docker images and container configurations 
 - **Falco** - Runtime security monitoring
 - **Sysdig** - Container runtime protection
 
-## Common Vulnerabilities
-
-1. **CVE-2021-44228** - Log4j vulnerability
-2. **CVE-2022-0492** - Container escape vulnerabilities
-3. **CVE-2021-30465** - RunC vulnerabilities
-4. **Base Image CVEs** - Operating system vulnerabilities
 
 ## Learning Objectives
 
@@ -66,7 +61,7 @@ By the end of this module, you will:
 4. Learn to interpret scanner results
 5. Implement security fixes and best practices
 
-## Container Security Best Practices
+## Container Security Best Practices #TODO: Should we merge this with the checklist?
 
 - Use minimal base images (distroless, alpine)
 - Run containers as non-root users

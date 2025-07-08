@@ -2,11 +2,20 @@
 
 This workshop module focuses on identifying and preventing the exposure of sensitive credentials, API keys, and other secrets in source code, configuration files, and git history.
 
-## What is Secrets Detection?
+## Why is Secrets Detection important?
+This is an old problem, but it is still a common one ([specially with the AI surge](https://www.wiz.io/blog/leaking-ai-secrets-in-public-code)). Secrets are the keys to your kingdom. If a password or token is accidentally committed to code, it's immediately at risk, potentially leading to:
+
+- **Data Breaches** - Exposed credentials can lead to unauthorized access
+- **Supply Chain Attacks** - Compromised secrets enable lateral movement
+- **Compliance Issues** - Regulatory requirements for data protection
+- **Financial Loss** - Unauthorized usage of cloud services
+- **Reputation Damage** - Public exposure of security incidents
 
 Secrets detection involves scanning code repositories, commit history, and configuration files to identify exposed credentials such as API keys, passwords, tokens, certificates, and other sensitive information that should not be stored in version control.
 
-## Common Types of Secrets
+Ideally, we should implement this before pushing the code to the repository, using [pre-commit](https://github.com/pre-commit/pre-commit) or similar tools. But accidents happen, so it's important to have a process to detect them in the pipeline as a safety net.
+
+### Common Types of Secrets
 
 1. **API Keys** - Third-party service credentials
 2. **Database Passwords** - Database connection strings
@@ -16,29 +25,21 @@ Secrets detection involves scanning code repositories, commit history, and confi
 6. **Application Secrets** - JWT secrets, encryption keys
 7. **Service Account Keys** - GCP service account JSON files
 
-## Why Secrets Detection Matters
+### Other types of secrets or sensitive data
+There are other types of secrets or sensitive data that may not be covered by the tools we will use in this workshop, but that are still important to keep in mind:
 
-- **Data Breaches** - Exposed credentials can lead to unauthorized access
-- **Supply Chain Attacks** - Compromised secrets enable lateral movement
-- **Compliance Issues** - Regulatory requirements for data protection
-- **Financial Loss** - Unauthorized usage of cloud services
-- **Reputation Damage** - Public exposure of security incidents
+- **Webhooks** - Webhooks are used to trigger actions in other systems, and can be used to trigger malicious actions.
+  - Like Slack webhooks #TODO: Elaborate on this
+- **AWS Account IDs** - AWS account IDs (or other cloud provider identifiers) can be used to enumerate resources and help attackers to map the attack surface.
+  - There's a lot of discussion about if this should be considered a secret or not. #TODO: Elaborate on this, and find references.
 
-## Tools Used in This Module
+## Tools Used in This Module #TODO: Update this section
 
 - **TruffleHog** - Git history secrets scanner
 - **GitLeaks** - SAST-focused secrets detection
 - **detect-secrets** - Yelp's secrets detection library
 - **GitHub Secret Scanning** - Built-in GitHub security feature
 - **HashiCorp Vault** - Secrets management solution
-
-## Common Secrets Patterns
-
-- **AWS Access Keys**: `AKIA[0-9A-Z]{16}`
-- **GitHub Tokens**: `ghp_[0-9a-zA-Z]{36}`
-- **Slack Tokens**: `xox[baprs]-[0-9]{12}-[0-9]{12}-[0-9a-zA-Z]{24}`
-- **JWT Tokens**: Base64 encoded with specific structure
-- **Private Keys**: `-----BEGIN PRIVATE KEY-----`
 
 ## Learning Objectives
 
@@ -57,7 +58,7 @@ By the end of this module, you will:
 4. Learn to configure secrets detection tools
 5. Implement prevention strategies
 
-## Security Best Practices
+## Security Best Practices #TODO: Should we merge this with the checklist?
 
 - Use environment variables for secrets
 - Implement proper .gitignore patterns

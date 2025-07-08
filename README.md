@@ -14,28 +14,31 @@ Learn to implement a complete secure software development lifecycle with:
 
 ## 🏗️ Workshop Structure
 
-The workshop is organized into progressive modules, each focusing on a specific aspect of pipeline security:
+The workshop is organized into different modules, each focusing on a specific aspect of pipeline security:
 
 ### 📁 Repository Structure
 
 ```
-├── .github/workflows/          # GitHub Actions workflows
-│   ├── pipeline-orchestrator.yml  # Main orchestrator
-│   ├── 01-pipeline-scan.yml    # Pipeline security scan
-│   ├── 02-code-analysis.yml    # SAST/SCA scanning
-│   ├── 03-secrets-detection.yml # Secrets scanning
-│   ├── 04-build.yml            # Application build
-│   ├── 05-container-scan.yml   # Container security
-│   ├── 06-iac-scan.yml         # Infrastructure scanning
+├── .github/workflows/               # GitHub Actions workflows
+│   ├── pipeline-orchestrator.yml    # Main orchestrator
+│   ├── 01-pipeline-scan.yml         # Pipeline security scan
+│   ├── 02-code-analysis.yml         # SAST/SCA scanning
+│   ├── 03-secrets-detection.yml     # Secrets scanning
+│   ├── 04-build.yml                 # Application build
+│   ├── 05-container-scan.yml        # Container security
+│   ├── 06-iac-scan.yml              # Infrastructure scanning
 │   ├── 07-deploy-infrastructure.yml # Infra deployment
-│   ├── 08-deploy-application.yml # App deployment
-│   └── 09-runtime-testing.yml  # Runtime security tests
-├── code/                       # Sample vulnerable application
-├── infra/                      # Terraform infrastructure
-└── workshop/                   # Workshop modules and documentation
+│   ├── 08-deploy-application.yml    # App deployment
+│   └── 09-runtime-infra-scan.yml    # Runtime infrastructure scan
+├── code/                            # Sample vulnerable application
+├── infra/                           # Terraform infrastructure
+└── workshop/                        # Workshop modules and documentation
 ```
 
 ## 📚 Workshop Modules
+
+### 0. 🐦‍🔥 [Introduction](workshop/)
+Workshop introduction and overview.
 
 ### 1. 🔍 [Pipeline Security Scan](workshop/pipeline_scan/)
 Learn to scan CI/CD pipelines for security misconfigurations and vulnerabilities.
@@ -52,8 +55,8 @@ Scan Docker images and containers for vulnerabilities and misconfigurations.
 ### 5. 🏗️ [Infrastructure Security Scan](workshop/iac_scan/)
 Analyze Infrastructure as Code (Terraform) for security issues.
 
-### 6. 🔍 [Runtime Security Testing](workshop/runtime_scan/)
-Perform dynamic security testing and runtime monitoring.
+### 6. 🔍 [Runtime Infrastructure Scan](workshop/runtime_infra_scan/)
+Scan the "real" infrastructure for vulnerabilities.
 
 ## 🚀 Getting Started
 
@@ -63,12 +66,27 @@ Perform dynamic security testing and runtime monitoring.
 - Understanding of Docker and containers
 - Familiarity with cloud infrastructure concepts
 
+> [!TIP]
+> While this workshop uses GitHub Actions, most of the skills and best practices you learn can be applied to any CI/CD platform.
+
 ### Workshop Flow
 1. **Fork this repository** to your GitHub account
 2. **Follow each module** in the workshop directory
 3. **Run the workflows** and observe the security findings
 4. **Learn to fix** the identified vulnerabilities
 5. **Implement security best practices**
+
+## 🎓 Learning Outcomes
+
+By completing this workshop, you will:
+- Understand the importance of shift-left security
+- Know how to implement comprehensive security scanning
+- Learn to interpret and triage security findings
+- Understand security best practices for CI/CD
+- Be able to build secure, automated pipelines
+
+---
+---
 
 ## 🔧 Sample Application
 
@@ -89,25 +107,10 @@ The Terraform configuration includes common misconfigurations:
 - Missing security controls
 - Hardcoded credentials
 
-## 📊 Security Scanning Results
-
-Each workflow will demonstrate realistic security findings:
-- **High/Critical vulnerabilities** in dependencies
-- **Hardcoded secrets** in code and configuration
-- **Container vulnerabilities** in base images
-- **Infrastructure misconfigurations** in Terraform
-- **Runtime vulnerabilities** in the running application
-
-## 🎓 Learning Outcomes
-
-By completing this workshop, you will:
-- Understand the importance of shift-left security
-- Know how to implement comprehensive security scanning
-- Learn to interpret and triage security findings
-- Understand security best practices for CI/CD
-- Be able to build secure, automated pipelines
 
 ## 🛠️ Tools Demonstrated
+
+#TODO: Update this section with the tools used in the workshop
 
 The workshop showcases various security tools:
 - **GitHub Security Features** (Dependabot, Secret Scanning)
@@ -116,22 +119,6 @@ The workshop showcases various security tools:
 - **Container Scanners** (Trivy, Grype, Docker Bench)
 - **IaC Scanners** (Checkov, TFSec, Terrascan)
 - **DAST Tools** (OWASP ZAP, Burp Suite)
-
-## 🔄 Workshop Progression
-
-1. **Start with vulnerable code** - See realistic security issues
-2. **Run security scans** - Understand what tools detect
-3. **Analyze findings** - Learn to prioritize and triage
-4. **Implement fixes** - Apply security best practices
-5. **Verify improvements** - Confirm issues are resolved
-
-## 📈 Success Metrics
-
-Track your progress through:
-- Reduced number of security findings
-- Faster detection of security issues
-- Improved security posture scores
-- Better understanding of security practices
 
 ## 🤝 Contributing
 
