@@ -2,7 +2,7 @@
 
 This workshop module focuses on scanning the pipeline configuration itself for security vulnerabilities and misconfigurations.
 
-## Why is Pipeline Security important?
+## Why is Pipeline Security Important?
 
 Many organizations overlook the pipeline as a potential attack surface. Malicious actors know that compromising your CI/CD system can grant them access to source code, privileged credentials, and even the ability to inject malicious code into your production systems without being detected by application security tools.
 
