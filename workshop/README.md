@@ -10,17 +10,24 @@ Let's start with some important concepts:
 
 A pipeline is a series of automated steps that build, test, and deploy software. It is a key part of the software development lifecycle and helps ensure that software is delivered with high quality and security.
 
-Related with pipelines, probably you heard about the concepts of Continuous Integration and Continuous Delivery. But to build a truly modern and resilient pipeline, we need to formally add a third component: Continuous Security. Let's quickly define them:
+Related with pipelines, probably you heard about the concepts of Continuous Integration and Continuous Delivery. But to build a truly modern and resilient pipeline, we need to formally add a third component: Continuous Security.
 
-- We started with **Continuous Integration (CI)**. This is where developers merge code into a shared branch multiple times a day. Every merge kicks off an automated build and test, ensuring the mainline of your code is never broken for long.
+- **Continuous Integration (CI)**: This is where developers merge code into a shared branch multiple times a day. Every merge kicks off an automated build and test, ensuring the mainline of your code is never broken for long.
 
-- Then we evolved to **Continuous Delivery (CD)**. This takes CI a step further. It’s an automated process that ensures any change passing the tests can be safely deployed to production with a single click, making release day a non-event.
+- **Continuous Delivery (CD)**: This takes CI a step further. It’s an automated process that ensures any change passing the tests can be safely deployed to production with a single click, making release day a non-event.
 
-- Which brings us to today's focus: **Continuous Security (CS)**. This is the crucial next step in the evolution, embedding security into the process. It means automating security controls and tests throughout the pipeline, just like we do for quality, to find vulnerabilities when they are cheapest and easiest to fix.
+- **Continuous Security (CS)**: This is the crucial next step in the evolution, embedding security into the process. It means automating security controls and tests throughout the pipeline, just like we do for quality, to find vulnerabilities when they are cheapest and easiest to fix.
+
+
 
 ### What is Shift-Left Security?
 
 Shift-left security is a security practice that aims to move security checks and mitigations as early as possible in the software development lifecycle. This approach helps catch security issues early, before they reach production, and reduces the risk of vulnerabilities being exploited.
+
+<p align="center">
+<img src="./imgs/shift-left.png" alt="Shift-Left Security" width="800">
+<p><em>Based on the image from https://devopedia.org/shift-left</em></p>
+</p>
 
 
 ## Workshop Goals
