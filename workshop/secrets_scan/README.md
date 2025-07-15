@@ -2,7 +2,7 @@
 
 This workshop module focuses on identifying and preventing the exposure of sensitive credentials, API keys, and other secrets in source code, configuration files, and git history.
 
-## Why is Secrets Detection important?
+## Why is Secrets Detection Important?
 This is an old problem, but it is still a common one ([specially with the AI surge](https://www.wiz.io/blog/leaking-ai-secrets-in-public-code)). Secrets are the keys to your kingdom. If a password or token is accidentally committed to code, it's immediately at risk, potentially leading to:
 
 - **Data Breaches** - Exposed credentials can lead to unauthorized access

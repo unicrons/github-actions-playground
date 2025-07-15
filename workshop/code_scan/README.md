@@ -10,7 +10,7 @@ SAST analyzes source code, bytecode, or binary code to identify security vulnera
 
 SCA identifies and analyzes open source components and third-party dependencies in applications to detect known vulnerabilities, license compliance issues, and outdated packages.
 
-## Why is Code Security important?
+## Why is Code Security Important?
 
 Malicious actors can exploit vulnerabilities in your code to gain unauthorized access, steal sensitive data, or disrupt your systems.
 
