@@ -9,7 +9,7 @@ on:
 
 jobs:
   # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
-  # Copy from: workshop/{scan-type}/workflow.yml
+  # Copy from: workshop/pipeline_scan/{tool}/workflow.yml
   
   workshop-placeholder:
     name: "🚧 Workshop Exercise Placeholder"

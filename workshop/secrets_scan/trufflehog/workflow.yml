@@ -3,19 +3,19 @@
 # TRUFFLEHOG SECRETS SCAN JOB
 # =============================================================================
 #
-# TruffleHog is a secrets detection tool for finding credentials in code
+# TruffleHog is a secrets scan tool for finding credentials in code
 # Repository: https://github.com/trufflesecurity/trufflehog
 #
 # TO USE THIS JOB:
-# 1. Copy this entire job definition into .github/workflows/03-secrets-detection.yml
-# 2. Replace the current jobs: definition with this one 
+# 1. Copy this entire job definition into .github/workflows/03-secrets-scan.yml
+# 2. Replace the current jobs: definition with this one
 # 3. The job will automatically scan the entire repository for secrets
 # 4. The scan will fail if any secrets are found
 # =============================================================================
 
 jobs:
   secrets-scan:
-    name: Secrets Detection Scan
+    name: Secrets Scan
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.trufflehog.outputs.result }}
