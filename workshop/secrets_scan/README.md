@@ -1,8 +1,8 @@
-# Secrets Detection
+# Secrets Scan 
 
 This workshop module focuses on identifying and preventing the exposure of sensitive credentials, API keys, and other secrets in source code, configuration files, and git history.
 
-## Why is Secrets Detection Important?
+## Why is Secrets Scan Important?
 This is an old problem, but it is still a common one ([specially with the AI surge](https://www.wiz.io/blog/leaking-ai-secrets-in-public-code)). Secrets are the keys to your kingdom. If a password or token is accidentally committed to code, it's immediately at risk, potentially leading to:
 
 - **Data Breaches** - Exposed credentials can lead to unauthorized access
@@ -11,7 +11,7 @@ This is an old problem, but it is still a common one ([specially with the AI sur
 - **Financial Loss** - Unauthorized usage of cloud services
 - **Reputation Damage** - Public exposure of security incidents
 
-Secrets detection involves scanning code repositories, commit history, and configuration files to identify exposed credentials such as API keys, passwords, tokens, certificates, and other sensitive information that should not be stored in version control.
+Secrets scan involves scanning code repositories, commit history, and configuration files to identify exposed credentials such as API keys, passwords, tokens, certificates, and other sensitive information that should not be stored in version control.
 
 Ideally, we should implement this before pushing the code to the repository, using [pre-commit](https://github.com/pre-commit/pre-commit) or similar tools. But accidents happen, so it's important to have a process to detect them in the pipeline as a safety net.
 
