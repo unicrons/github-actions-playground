@@ -20,12 +20,17 @@ on:
         value: ${{ jobs.load-test.outputs.result }}
 
 jobs:
-  runtime-infra-scan:
-    name: Runtime Infrastructure Scan
+  # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
+  # Copy from: workshop/{scan-type}/workflow.yml
+  
+  workshop-placeholder:
+    name: "🚧 Workshop Exercise Placeholder"
     runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.placeholder.outputs.result }}
     steps:
-      - name: to_remove
-        id: to_remove
+      - name: Placeholder
+        id: placeholder
         run: |
-          echo "Copy here the workflow of the runtime infrastructure scan tool you want to use.
-          Inside workshop/runtime_infra_scan/{tool}/workflow.yml"
+          echo "Replace this job with content from workshop folder!"
+          echo "result=workshop-placeholder" >> $GITHUB_OUTPUT
