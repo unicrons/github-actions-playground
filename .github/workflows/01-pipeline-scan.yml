@@ -1,19 +1,24 @@
 name: Pipeline Security Scan
 
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
   workflow_call:
+    outputs:
+      scan-result:
+        description: "Pipeline scan result"
+        value: ${{ jobs.pipeline-scan.outputs.result }}
 
 jobs:
-  pipeline-scan:
-    name: Analyze Github Workflows
+  # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
+  # Copy from: workshop/{scan-type}/workflow.yml
+  
+  workshop-placeholder:
+    name: "🚧 Workshop Exercise Placeholder"
     runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.placeholder.outputs.result }}
     steps:
-      - name: to_remove
-        id: to_remove
+      - name: Placeholder
+        id: placeholder
         run: |
-          echo "Copy here the workflow of the pipeline scan tool you want to use.
-          Inside workshop/pipeline_scan/{tool}/workflow.yml"
+          echo "Replace this job with content from workshop folder!"
+          echo "result=workshop-placeholder" >> $GITHUB_OUTPUT

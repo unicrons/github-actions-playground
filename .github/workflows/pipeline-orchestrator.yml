@@ -1,11 +1,15 @@
 name: Pipeline Orchestrator
 
 on:
-  push:
-    branches: [main, develop]
   pull_request:
     branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  issues: write
+  pull-requests: write
 
 jobs:
   pipeline-scan:
@@ -18,6 +22,11 @@ jobs:
   secrets-detection:
     needs: pipeline-scan
     uses: ./.github/workflows/03-secrets-detection.yml
+    permissions:
+      contents: read
+      id-token: write
+      issues: write
+      pull-requests: write
 
   iac-scan:
     needs: pipeline-scan

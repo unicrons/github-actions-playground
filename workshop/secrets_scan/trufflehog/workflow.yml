@@ -1,0 +1,44 @@
+
+# =============================================================================
+# TRUFFLEHOG SECRETS SCAN JOB
+# =============================================================================
+#
+# TruffleHog is a secrets detection tool for finding credentials in code
+# Repository: https://github.com/trufflesecurity/trufflehog
+#
+# TO USE THIS JOB:
+# 1. Copy this entire job definition into .github/workflows/03-secrets-detection.yml
+# 2. Replace the current jobs: definition with this one 
+# 3. The job will automatically scan the entire repository for secrets
+# 4. The scan will fail if any secrets are found
+# =============================================================================
+
+jobs:
+  secrets-scan:
+    name: Secrets Detection Scan
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.trufflehog.outputs.result }}
+    steps:
+      # Checkout the repository with full history
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Install and run TruffleHog secrets scanner
+      - name: TruffleHog OSS
+        id: trufflehog
+        run: |
+          # Install TruffleHog
+          curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
+
+          # Run filesystem scan and capture result
+          if trufflehog filesystem . --no-verification --filter-entropy=1.0 --results="verified,unknown,unverified,filtered_unverified" --fail; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ No secrets detected"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ Secrets detected in repository"
+            exit 1
+          fi
