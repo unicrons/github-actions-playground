@@ -33,13 +33,9 @@ There are other types of secrets or sensitive data that may not be covered by th
 - **AWS Account IDs** - AWS account IDs (or other cloud provider identifiers) can be used to enumerate resources and help attackers to map the attack surface.
   - There's a lot of discussion about if this should be considered a secret or not. #TODO: Elaborate on this, and find references.
 
-## Tools Used in This Module #TODO: Update this section
+## Tools Used in This Module
 
 - **TruffleHog** - Git history secrets scanner
-- **GitLeaks** - SAST-focused secrets detection
-- **detect-secrets** - Yelp's secrets detection library
-- **GitHub Secret Scanning** - Built-in GitHub security feature
-- **HashiCorp Vault** - Secrets management solution
 
 ## Learning Objectives
 
