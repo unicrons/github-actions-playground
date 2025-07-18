@@ -3,7 +3,7 @@
 This workshop module focuses on identifying and preventing the exposure of sensitive credentials, API keys, and other secrets in source code, configuration files, and git history.
 
 ## Why is Secrets Detection Important?
-This is an old problem, but it is still a common one ([specially with the AI surge](https://www.wiz.io/blog/leaking-ai-secrets-in-public-code)). Secrets are the keys to your kingdom. If a password or token is accidentally committed to code, it's immediately at risk, potentially leading to:
+This is an old problem, but it is still a common one ([especially with the AI surge](https://www.wiz.io/blog/leaking-ai-secrets-in-public-code)). Secrets are the keys to your kingdom. If a password or token is accidentally committed to code, it's immediately at risk, potentially leading to:
 
 - **Data Breaches** - Exposed credentials can lead to unauthorized access
 - **Supply Chain Attacks** - Compromised secrets enable lateral movement
@@ -69,9 +69,12 @@ By the end of this module, you will:
 
 ## Security Checklist
 
+- [ ] Use environment variables for secrets
+- [ ] Implement proper .gitignore patterns
 - [ ] No secrets in source code
 - [ ] Git history cleaned of secrets
 - [ ] Environment variables properly configured
 - [ ] Secrets management solution implemented
 - [ ] Pre-commit hooks for secrets detection
+- [ ] Rotate compromised credentials immediately
 - [ ] Regular secrets auditing process

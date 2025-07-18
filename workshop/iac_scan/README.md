@@ -3,11 +3,11 @@
 This workshop module focuses on scanning Infrastructure as Code (IaC) configurations to identify security misconfigurations before infrastructure deployment.
 
 ## Why is IaC Security Important?
-This is a key step in our shift-left security approach. The same way we analyze our application code before deploying it, we should do the same with our infrastructure code.
+This is a key step in our shift-left security approach. In the same way we analyze our application code before deploying it, we should do the same with our infrastructure code.
 
 IaC security scanning analyzes infrastructure definitions (Terraform, CloudFormation, Kubernetes YAML, etc.) to identify security misconfigurations, compliance violations, and best practice deviations before resources are provisioned.
 
-This step has its limitations, as some issues can only be detected at runtime, but all we can catch before the resources are deployed will be easier to fix and will provide a faster feedback loop.
+This step has its limitations, as some issues can only be detected at runtime, but everything we can catch before the resources are deployed will be easier to fix and will provide a faster feedback loop.
 
 ## Common IaC Security Issues
 

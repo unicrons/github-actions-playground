@@ -2,7 +2,7 @@
 
 This workshop is designed to help you understand the importance of shift-left security and how to implement comprehensive security scanning in your pipeline.
 
-All of this without forgeting the human factor, as the final objective is not blind security but enabling your users (or yourself) to build secure software.
+All of this without forgetting the human factor, as the final objective is not blind security but enabling your users (or yourself) to build secure software.
 
 Let's start with some important concepts:
 
@@ -10,7 +10,7 @@ Let's start with some important concepts:
 
 A pipeline is a series of automated steps that build, test, and deploy software. It is a key part of the software development lifecycle and helps ensure that software is delivered with high quality and security.
 
-Related with pipelines, probably you heard about the concepts of Continuous Integration and Continuous Delivery. But to build a truly modern and resilient pipeline, we need to formally add a third component: Continuous Security.
+Related to pipelines, you have probably heard about the concepts of Continuous Integration and Continuous Delivery. But to build a truly modern and resilient pipeline, we need to formally add a third component: Continuous Security.
 
 - **Continuous Integration (CI)**: This is where developers merge code into a shared branch multiple times a day. Every merge kicks off an automated build and test, ensuring the mainline of your code is never broken for long.
 
@@ -31,7 +31,7 @@ Shift-left security is a security practice that aims to move security checks and
 
 
 ## Workshop Goals
-The idea of this workshop is demonstrate  how to build a "perfect" (secure and practical) CI/CD pipeline using open-source tools (OSS).
+The idea of this workshop is to demonstrate how to build a "perfect" (secure and practical) CI/CD pipeline using open-source tools (OSS).
 
 The goal is inspirational, not prescriptive. We do not want you to copy this examples, but to understand the principles and identify the modular components you can adapt to implement in your own environment.
 
@@ -48,7 +48,7 @@ The goal is inspirational, not prescriptive. We do not want you to copy this exa
 
 
 ## Workshop Index
-We suggest you to follow the workshop in the following order, but feel free to jump around and explore the different modules.
+We suggest you follow the workshop in the following order, but feel free to jump around and explore the different modules.
 
 1. [Pipeline Security Scan](pipeline_scan/)
 2. [Code Security Analysis](code_scan/)
