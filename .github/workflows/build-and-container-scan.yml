@@ -5,13 +5,13 @@ on:
     outputs:
       image-digest:
         description: "Built image digest"
-        value: ${{ jobs.build.outputs.digest }}
+        value: ${{ jobs.build-and-container-scan.outputs.digest }}
       image-tag:
         description: "Built image tag"
-        value: ${{ jobs.build.outputs.tag }}
+        value: ${{ jobs.build-and-container-scan.outputs.tag }}
       scan-result:
         description: "Container scan result"
-        value: ${{ jobs.build.outputs.scan-result }}
+        value: ${{ jobs.build-and-container-scan.outputs.scan-result }}
 
 env:
   REGISTRY: ghcr.io
@@ -21,8 +21,8 @@ jobs:
   # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
   # Copy from: workshop/container_scan/{tool}/workflow.yml
 
-  build:
-    name: "🚧 Build and Scan - Workshop Placeholder"
+  build-and-container-scan:
+    name: "🚧 Build and Container Scan - Workshop Placeholder"
     runs-on: ubuntu-latest
     outputs:
       digest: ${{ steps.placeholder.outputs.digest }}
@@ -32,8 +32,8 @@ jobs:
       - name: Workshop Placeholder
         id: placeholder
         run: |
-          echo "🚧 Replace this job with content from workshop/container_scan/trivy/workflow.yml!"
-          echo "This will implement: Build → Trivy Scan → Push workflow"
+          echo "🚧 Replace this job with content from workshop/container_scan/{tool}/workflow.yml!"
+          echo "This will implement: Build → Container Scan → Push workflow with your chosen tool"
           echo "digest=workshop-placeholder" >> $GITHUB_OUTPUT
           echo "tag=workshop-placeholder" >> $GITHUB_OUTPUT
           echo "scan-result=workshop-placeholder" >> $GITHUB_OUTPUT

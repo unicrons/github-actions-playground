@@ -23,14 +23,28 @@ jobs:
   # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
   # Copy from: workshop/runtime_infra_scan/{tool}/workflow.yml
   
-  workshop-placeholder:
-    name: "🚧 Workshop Exercise Placeholder"
+  dast:
+    name: "🚧 DAST - Workshop Placeholder"
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.placeholder.outputs.result }}
     steps:
-      - name: Placeholder
+      - name: Workshop Placeholder
         id: placeholder
         run: |
-          echo "Replace this job with content from workshop folder!"
+          echo "🚧 Replace this job with content from workshop/runtime_infra_scan/{tool}/workflow.yml!"
+          echo "This will implement: DAST security testing with your chosen tool"
+          echo "result=workshop-placeholder" >> $GITHUB_OUTPUT
+
+  load-test:
+    name: "🚧 Load Test - Workshop Placeholder"
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.placeholder.outputs.result }}
+    steps:
+      - name: Workshop Placeholder
+        id: placeholder
+        run: |
+          echo "🚧 Replace this job with content from workshop/runtime_infra_scan/{tool}/workflow.yml!"
+          echo "This will implement: Load testing with your chosen tool"
           echo "result=workshop-placeholder" >> $GITHUB_OUTPUT

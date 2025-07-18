@@ -15,9 +15,9 @@ jobs:
   pipeline-scan:
     uses: ./.github/workflows/pipeline-scan.yml
 
-  code-analysis:
+  code-scan:
     needs: pipeline-scan
-    uses: ./.github/workflows/code-analysis.yml
+    uses: ./.github/workflows/code-scan.yml
 
   secrets-scan:
     needs: pipeline-scan
@@ -32,9 +32,9 @@ jobs:
     needs: pipeline-scan
     uses: ./.github/workflows/iac-scan.yml
 
-  build:
-    needs: [code-analysis, secrets-scan]
-    uses: ./.github/workflows/build.yml
+  build-and-container-scan:
+    needs: [code-scan, secrets-scan]
+    uses: ./.github/workflows/build-and-container-scan.yml
 
   deploy-infrastructure:
     needs: iac-scan
@@ -44,12 +44,12 @@ jobs:
       environment: staging
 
   deploy-application:
-    needs: [build, deploy-infrastructure]
+    needs: [build-and-container-scan, deploy-infrastructure]
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy-application.yml
     with:
       environment: staging
-      image-digest: ${{ needs.build.outputs.image-digest }}
+      image-digest: ${{ needs.build-and-container-scan.outputs.image-digest }}
 
   runtime-infra-scan:
     needs: deploy-application
@@ -65,10 +65,10 @@ jobs:
     needs:
       [
         pipeline-scan,
-        code-analysis,
+        code-scan,
         secrets-scan,
         iac-scan,
-        build,
+        build-and-container-scan,
       ]
     if: always()
     steps:
@@ -77,10 +77,9 @@ jobs:
           echo "🎯 Perfect Pipeline Workshop - Results Summary"
           echo "============================================"
           echo "Pipeline Scan: ${{ needs.pipeline-scan.outputs.scan-result }}"
-          echo "SAST: ${{ needs.code-analysis.outputs.sast-result }}"
-          echo "SCA: ${{ needs.code-analysis.outputs.sca-result }}"
-          echo "Secrets: ${{ needs.secrets-scan.outputs.secrets-result }}"
-          echo "IaC Scan: ${{ needs.iac-scan.outputs.iac-result }}"
-          echo "Build & Container Scan: ${{ needs.build.outputs.scan-result }}"
+          echo "Code Scan: ${{ needs.code-scan.outputs.scan-result }}"
+          echo "Secrets Scan: ${{ needs.secrets-scan.outputs.scan-result }}"
+          echo "IaC Scan: ${{ needs.iac-scan.outputs.scan-result }}"
+          echo "Container Scan: ${{ needs.build-and-container-scan.outputs.scan-result }}"
           echo "============================================"
           echo "🎓 Workshop completed! Review the security findings above."
