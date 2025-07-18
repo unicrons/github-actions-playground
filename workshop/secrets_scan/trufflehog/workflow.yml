@@ -7,7 +7,7 @@
 # Repository: https://github.com/trufflesecurity/trufflehog
 #
 # TO USE THIS JOB:
-# 1. Copy this entire job definition into .github/workflows/03-secrets-scan.yml
+# 1. Copy this entire job definition into .github/workflows/secrets-scan.yml
 # 2. Replace the current jobs: definition with this one
 # 3. The job will automatically scan the entire repository for secrets
 # 4. The scan will fail if any secrets are found

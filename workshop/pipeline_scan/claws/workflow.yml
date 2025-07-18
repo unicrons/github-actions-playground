@@ -5,7 +5,7 @@
 # Repository: https://github.com/Betterment/claws
 #
 # TO USE THIS JOB:
-# 1. Copy this entire job definition into .github/workflows/01-pipeline-scan.yml
+# 1. Copy this entire job definition into .github/workflows/pipeline-scan.yml
 # 2. Replace the current jobs: definition with this one 
 # 3. Ensure you have a claws-config.yml file in workshop/pipeline_scan/
 # 4. The job will automatically scan all workflows in .github/workflows/

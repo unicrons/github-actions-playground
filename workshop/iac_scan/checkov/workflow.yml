@@ -5,7 +5,7 @@
 # Repository: https://github.com/bridgecrewio/checkov
 #
 # TO USE THIS JOB:
-# 1. Copy this entire job definition into .github/workflows/06-iac-scan.yml
+# 1. Copy this entire job definition into .github/workflows/iac-scan.yml
 # 2. Replace the current jobs: definition with this one 
 # 3. The job will automatically scan all terraform files in infra/
 # =============================================================================

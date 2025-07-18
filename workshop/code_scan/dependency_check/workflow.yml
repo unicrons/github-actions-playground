@@ -5,7 +5,7 @@
 # Repository: https://github.com/dependency-check/dependencycheck
 #
 # TO USE THIS JOB:
-# 1. Copy this entire job definition into .github/workflows/02-code-analysis.yml
+# 1. Copy this entire job definition into .github/workflows/code-analysis.yml
 # 2. Replace the current jobs: definition with this one 
 # 3. The job will automatically scan all code in the code/ directory
 # =============================================================================
