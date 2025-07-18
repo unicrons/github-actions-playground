@@ -3,9 +3,9 @@
 This workshop module covers container security scanning to identify vulnerabilities in container images and configurations.
 
 ## Why is Container Security Important?
-Containers are now one of the most common ways to deploy applications. They are also a common target for attackers, as they can be used to gain access to the underlying infrastructure, access to secrets (including cloud credentials) or run arbitrary code.
+Containers are now one of the most common ways to deploy applications. They are also a common target for attackers, as they can be used to gain access to the underlying infrastructure, access secrets (including cloud credentials), or run arbitrary code.
 
-Container security scanning analyzes images and container configurations to identify security vulnerabilities, misconfigurations, and compliance issues before releasing them..
+Container security scanning analyzes images and container configurations to identify security vulnerabilities, misconfigurations, and compliance issues before releasing them.
 
 ## Common Container Security Issues
 
@@ -73,11 +73,14 @@ By the end of this module, you will:
 
 ## Security Checklist
 
+- [ ] Use minimal base images (distroless, alpine)
 - [ ] Base image vulnerabilities addressed
 - [ ] No high/critical CVEs in final image
 - [ ] Container runs as non-root user
 - [ ] Minimal attack surface
 - [ ] Health checks implemented
+- [ ] Multi-stage builds to reduce attack surface
+- [ ] Regularly update base images
 - [ ] Security scanning in CI/CD
 - [ ] Image signing and verification
 - [ ] Runtime security monitoring

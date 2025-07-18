@@ -65,9 +65,12 @@ By the end of this module, you will:
 
 ## Security Checklist
 
+- [ ] Use environment variables for secrets
+- [ ] Implement proper .gitignore patterns
 - [ ] No secrets in source code
 - [ ] Git history cleaned of secrets
 - [ ] Environment variables properly configured
 - [ ] Secrets management solution implemented
 - [ ] Pre-commit hooks for secrets detection
+- [ ] Rotate compromised credentials immediately
 - [ ] Regular secrets auditing process
