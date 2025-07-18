@@ -1,11 +1,15 @@
 name: Pipeline Orchestrator
 
 on:
-  push:
-    branches: [main, develop]
   pull_request:
     branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  issues: write
+  pull-requests: write
 
 jobs:
   pipeline-scan:
@@ -15,16 +19,21 @@ jobs:
     needs: pipeline-scan
     uses: ./.github/workflows/02-code-analysis.yml
 
-  secrets-detection:
+  secrets-scan:
     needs: pipeline-scan
-    uses: ./.github/workflows/03-secrets-detection.yml
+    uses: ./.github/workflows/03-secrets-scan.yml
+    permissions:
+      contents: read
+      id-token: write
+      issues: write
+      pull-requests: write
 
   iac-scan:
     needs: pipeline-scan
     uses: ./.github/workflows/06-iac-scan.yml
 
   build:
-    needs: [code-analysis, secrets-detection]
+    needs: [code-analysis, secrets-scan]
     uses: ./.github/workflows/04-build.yml
 
   container-scan:
@@ -63,7 +72,7 @@ jobs:
       [
         pipeline-scan,
         code-analysis,
-        secrets-detection,
+        secrets-scan,
         iac-scan,
         build,
         container-scan,
@@ -77,7 +86,7 @@ jobs:
           echo "Pipeline Scan: ${{ needs.pipeline-scan.outputs.scan-result }}"
           echo "SAST: ${{ needs.code-analysis.outputs.sast-result }}"
           echo "SCA: ${{ needs.code-analysis.outputs.sca-result }}"
-          echo "Secrets: ${{ needs.secrets-detection.outputs.secrets-result }}"
+          echo "Secrets: ${{ needs.secrets-scan.outputs.secrets-result }}"
           echo "IaC Scan: ${{ needs.iac-scan.outputs.iac-result }}"
           echo "Container Scan: ${{ needs.container-scan.outputs.scan-result }}"
           echo "============================================"

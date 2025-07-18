@@ -74,7 +74,7 @@ This simple application helps demonstrate:
 1. **SAST Detection** - Hardcoded secrets and path traversal
 2. **SCA Analysis** - Vulnerable dependencies (lodash 4.17.15)
 3. **Container Scanning** - Outdated base image and root user
-4. **Secrets Detection** - Multiple types of exposed credentials
+4. **Secrets Scan** - Multiple types of exposed credentials
 5. **DAST Testing** - Runtime path traversal and information disclosure
 
 ## Vulnerability Examples

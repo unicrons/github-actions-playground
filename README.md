@@ -7,7 +7,7 @@ Welcome to the "Perfect Pipeline" workshop! This hands-on workshop teaches you h
 Learn to implement a complete secure software development lifecycle with:
 - Pipeline security scanning
 - Static and dynamic code analysis
-- Secrets detection and management
+- Secrets Scan and management
 - Container security scanning
 - Infrastructure as Code (IaC) security
 - Runtime security testing
@@ -23,7 +23,7 @@ The workshop is organized into different modules, each focusing on a specific as
 │   ├── pipeline-orchestrator.yml    # Main orchestrator
 │   ├── 01-pipeline-scan.yml         # Pipeline security scan
 │   ├── 02-code-analysis.yml         # SAST/SCA scanning
-│   ├── 03-secrets-detection.yml     # Secrets scanning
+│   ├── 03-secrets-scan.yml          # Secrets scanning
 │   ├── 04-build.yml                 # Application build
 │   ├── 05-container-scan.yml        # Container security
 │   ├── 06-iac-scan.yml              # Infrastructure scanning
@@ -46,7 +46,7 @@ Learn to scan CI/CD pipelines for security misconfigurations and vulnerabilities
 ### 2. 🔬 [Code Security Analysis](workshop/code_scan/)
 Implement SAST (Static Application Security Testing) and SCA (Software Composition Analysis).
 
-### 3. 🔐 [Secrets Detection](workshop/secrets_scan/)
+### 3. 🔐 [Secrets Scan](workshop/secrets_scan/)
 Detect and prevent exposure of credentials and sensitive information.
 
 ### 4. 🐳 [Container Security Scanning](workshop/container_scan/)
