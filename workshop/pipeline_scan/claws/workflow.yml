@@ -31,7 +31,7 @@ jobs:
 
       - name: Set Up Claws Config
         run: |
-          cp workshop/pipeline_scan/claws-config.yml /tmp/claws-config.yml
+          cp workshop/pipeline_scan/claws/claws-config.yml /tmp/claws-config.yml
 
       - name: Set Up Shellcheck
         run: |
