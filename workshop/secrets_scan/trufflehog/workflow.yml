@@ -7,7 +7,7 @@
 # Repository: https://github.com/trufflesecurity/trufflehog
 #
 # TO USE THIS JOB:
-# 1. Copy this entire job definition into .github/workflows/03-secrets-scan.yml
+# 1. Copy this entire job definition into .github/workflows/secrets-scan.yml
 # 2. Replace the current jobs: definition with this one
 # 3. The job will automatically scan the entire repository for secrets
 # 4. The scan will fail if any secrets are found
@@ -15,30 +15,34 @@
 
 jobs:
   secrets-scan:
-    name: Secrets Scan
+    name: Secrets Scan with TruffleHog
     runs-on: ubuntu-latest
     outputs:
-      result: ${{ steps.trufflehog.outputs.result }}
+      result: ${{ steps.scan-result.outputs.result }}
     steps:
-      # Checkout the repository with full history
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Install and run TruffleHog secrets scanner
-      - name: TruffleHog OSS
-        id: trufflehog
+      - name: Run TruffleHog secrets scanner
+        id: scan-tool
         run: |
           # Install TruffleHog
           curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
 
-          # Run filesystem scan and capture result
-          if trufflehog filesystem . --no-verification --filter-entropy=1.0 --results="verified,unknown,unverified,filtered_unverified" --fail; then
+          # Run filesystem scan
+          trufflehog filesystem . --no-verification --filter-entropy=1.0 --results="verified,unknown,unverified,filtered_unverified" --fail
+
+      - name: Set scan result
+        id: scan-result
+        if: always()
+        run: |
+          if [ "${{ steps.scan-tool.outcome }}" == "success" ]; then
             echo "result=success" >> $GITHUB_OUTPUT
-            echo "✅ No secrets detected"
+            echo "✅ Secrets scan passed - no secrets detected"
           else
             echo "result=failure" >> $GITHUB_OUTPUT
-            echo "❌ Secrets detected in repository"
+            echo "❌ Secrets scan failed - secrets detected in repository"
             exit 1
           fi

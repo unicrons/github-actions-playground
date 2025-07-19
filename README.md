@@ -21,15 +21,14 @@ The workshop is organized into different modules, each focusing on a specific as
 ```
 ├── .github/workflows/               # GitHub Actions workflows
 │   ├── pipeline-orchestrator.yml    # Main orchestrator
-│   ├── 01-pipeline-scan.yml         # Pipeline security scan
-│   ├── 02-code-analysis.yml         # SAST/SCA scanning
-│   ├── 03-secrets-scan.yml          # Secrets scanning
-│   ├── 04-build.yml                 # Application build
-│   ├── 05-container-scan.yml        # Container security
-│   ├── 06-iac-scan.yml              # Infrastructure scanning
-│   ├── 07-deploy-infrastructure.yml # Infra deployment
-│   ├── 08-deploy-application.yml    # App deployment
-│   └── 09-runtime-infra-scan.yml    # Runtime infrastructure scan
+│   ├── pipeline-scan.yml           # Pipeline security scan
+│   ├── code-analysis.yml           # SAST/SCA scanning
+│   ├── secrets-scan.yml            # Secrets scanning
+│   ├── build.yml                   # Application build & container scan
+│   ├── iac-scan.yml                # Infrastructure scanning
+│   ├── deploy-infrastructure.yml   # Infra deployment
+│   ├── deploy-application.yml      # App deployment
+│   └── runtime-infra-scan.yml      # Runtime infrastructure scan
 ├── code/                            # Sample vulnerable application
 ├── infra/                           # Terraform infrastructure
 └── workshop/                        # Workshop modules and documentation
