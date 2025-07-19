@@ -2,9 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-// Security issue: Hardcoded credentials
-const ADMIN_PASSWORD = 'admin123';
-const API_KEY = 'sk_test_1234567890abcdef';
+// Security issue: Hardcoded credentials - Real API patterns that TruffleHog will detect
+const GITHUB_TOKEN = 'ghp_wWPw5k4aF6wZjF2Fg7s2h3j4k5l6m7n8o9p0';
 
 const PORT = process.env.PORT || 3000;
 
@@ -23,9 +22,10 @@ const server = http.createServer((req, res) => {
       status: 'healthy',
       timestamp: new Date().toISOString(),
       version: '1.0.0',
-      // Security issue: Exposing internal information
+      // Security issue: Exposing internal information and secrets
       server_info: process.version,
-      admin_password: ADMIN_PASSWORD // Never expose this!
+      aws_region: 'us-east-1',
+      github_repo: 'security-workshop'
     }));
   } else if (url === '/' && method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -38,11 +38,11 @@ const server = http.createServer((req, res) => {
       <body>
         <h1>Simple Workshop Application</h1>
         <p>This is a simple application for security scanning workshop.</p>
-        <p>API Key: ${API_KEY}</p>
-        <p>Admin Password: ${ADMIN_PASSWORD}</p>
+        <p>GitHub Token: ${GITHUB_TOKEN}</p>
         <script>
           // Security issue: Exposing secrets in client-side code
-          console.log('Admin password:', '${ADMIN_PASSWORD}');
+          console.log('AWS Secret:', '${AWS_SECRET_KEY}');
+          console.log('GitHub Token:', '${GITHUB_TOKEN}');
         </script>
       </body>
       </html>
@@ -75,6 +75,5 @@ server.listen(PORT, () => {
   console.log(`Health check: http://localhost:${PORT}/health`);
 
   // Security issue: Logging sensitive information
-  console.log(`Admin password: ${ADMIN_PASSWORD}`);
-  console.log(`API Key: ${API_KEY}`);
+  console.log(`GitHub Token: ${GITHUB_TOKEN}`);
 });
