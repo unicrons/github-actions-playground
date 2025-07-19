@@ -54,15 +54,6 @@ By the end of this module, you will:
 4. Learn to configure secrets detection tools
 5. Implement prevention strategies
 
-## Security Best Practices #TODO: Should we merge this with the checklist?
-
-- Use environment variables for secrets
-- Implement proper .gitignore patterns
-- Use secrets management solutions
-- Rotate compromised credentials immediately
-- Implement pre-commit hooks for secrets detection
-- Regular auditing of repositories
-
 ## Security Checklist
 
 - [ ] Use environment variables for secrets
