@@ -36,7 +36,7 @@ jobs:
           echo "Configuring load balancer..."
           echo "Running database migrations..."
           echo "Updating environment variables..."
-          echo "result=deployed" >> $GITHUB_OUTPUT
+          echo "result=deployed" >> "$GITHUB_OUTPUT"
           echo "✅ Application deployed successfully"
 
       - name: Health Check

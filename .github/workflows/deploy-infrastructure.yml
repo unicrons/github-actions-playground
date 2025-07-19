@@ -38,7 +38,7 @@ jobs:
           echo "terraform plan -var environment=${{ inputs.environment }}"
           echo "Applying Terraform configuration..."
           echo "terraform apply -auto-approve"
-          echo "result=deployed" >> $GITHUB_OUTPUT
+          echo "result=deployed" >> "$GITHUB_OUTPUT"
           echo "✅ Infrastructure deployed successfully"
 
       - name: Infrastructure Summary

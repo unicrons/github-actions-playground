@@ -74,10 +74,10 @@ jobs:
         if: always()
         run: |
           if [ "${{ steps.scan-tool.outcome }}" == "success" ]; then
-            echo "result=success" >> $GITHUB_OUTPUT
+            echo "result=success" >> "$GITHUB_OUTPUT"
             echo "✅ Pipeline scan passed - no security issues detected"
           else
-            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "result=failure" >> "$GITHUB_OUTPUT"
             echo "❌ Pipeline scan failed - security issues detected in workflows"
             exit 1
           fi
