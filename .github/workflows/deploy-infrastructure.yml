@@ -2,11 +2,6 @@ name: Deploy Infrastructure
 
 on:
   workflow_call:
-    inputs:
-      environment:
-        description: "Environment to deploy to"
-        required: true
-        type: string
     outputs:
       deployment-result:
         description: "Infrastructure deployment result"
@@ -16,36 +11,23 @@ jobs:
   deploy-infra:
     name: Deploy Infrastructure
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: production
     outputs:
       result: ${{ steps.deploy.outputs.result }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.5.0"
-
       - name: Deploy infrastructure
         id: deploy
         run: |
-          cd infra
-          echo "🚀 Deploying infrastructure with Terraform..."
-          echo "Environment: ${{ inputs.environment }}"
-          echo "Planning infrastructure changes..."
-          echo "terraform plan -var environment=${{ inputs.environment }}"
-          echo "Applying Terraform configuration..."
-          echo "terraform apply -auto-approve"
-          echo "result=deployed" >> $GITHUB_OUTPUT
+          echo "🚀 Deploying infrastructure to production..."
+          echo "🏗️ Terraform plan -var environment=production"
+          echo "🏗️ Terraform apply -auto-approve"
+          echo "result=deployed" >> "$GITHUB_OUTPUT"
           echo "✅ Infrastructure deployed successfully"
 
       - name: Infrastructure Summary
         run: |
           echo "🏗️ Infrastructure Deployment Summary:"
-          echo "- Environment: ${{ inputs.environment }}"
+          echo "- Environment: production"
           echo "- Region: us-west-2"
-          echo "- Resources created: VPC, Subnets, Security Groups, EC2"
-          echo "- Load balancer configured"
-          echo "- Database instance provisioned"
+          echo "- Resources: VPC, Subnets, Security Groups, EC2"
+          echo "- Status: Healthy"

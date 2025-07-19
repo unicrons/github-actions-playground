@@ -3,7 +3,6 @@ name: Pipeline Orchestrator
 on:
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -40,16 +39,11 @@ jobs:
     needs: iac-scan
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy-infrastructure.yml
-    with:
-      environment: staging
 
   deploy-application:
     needs: [build-and-container-scan, deploy-infrastructure]
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy-application.yml
-    with:
-      environment: staging
-      image-digest: ${{ needs.build-and-container-scan.outputs.image-digest }}
 
   runtime-infra-scan:
     needs: deploy-application

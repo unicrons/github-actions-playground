@@ -39,10 +39,10 @@ jobs:
         if: always()
         run: |
           if [ "${{ steps.scan-tool.outcome }}" == "success" ]; then
-            echo "result=success" >> $GITHUB_OUTPUT
+            echo "result=success" >> "$GITHUB_OUTPUT"
             echo "✅ Secrets scan passed - no secrets detected"
           else
-            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "result=failure" >> "$GITHUB_OUTPUT"
             echo "❌ Secrets scan failed - secrets detected in repository"
             exit 1
           fi

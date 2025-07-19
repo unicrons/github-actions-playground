@@ -67,10 +67,10 @@ jobs:
         if: always()
         run: |
           if [ "${{ steps.scan-tool.outcome }}" == "success" ]; then
-            echo "result=success" >> $GITHUB_OUTPUT
+            echo "result=success" >> "$GITHUB_OUTPUT"
             echo "✅ Container scan passed - no critical vulnerabilities found"
           else
-            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "result=failure" >> "$GITHUB_OUTPUT"
             echo "❌ Container scan failed - critical vulnerabilities detected"
             exit 1
           fi
