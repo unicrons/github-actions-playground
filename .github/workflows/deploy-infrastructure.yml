@@ -31,7 +31,7 @@ jobs:
       - name: Deploy infrastructure
         id: deploy
         run: |
-          cd infra
+          cd infra || exit 1
           echo "🚀 Deploying infrastructure with Terraform..."
           echo "Environment: ${{ inputs.environment }}"
           echo "Planning infrastructure changes..."
