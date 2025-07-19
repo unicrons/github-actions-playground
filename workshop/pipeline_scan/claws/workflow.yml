@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set Up Ruby
-        uses: ruby/setup-ruby@d8d83c3960843afb664e821fed6be52f37da5267 # v1.231.0
+        uses: ruby/setup-ruby@master
         with:
           ruby-version: "3.3"
 
@@ -72,7 +72,7 @@ jobs:
           echo "🚀 Running Claws security analysis..."
 
           # Execute the security analysis
-          analyze -f github -c /tmp/claws-config.yml "${flags[@]}"
+          analyze -f stdout -c /tmp/claws-config.yml "${flags[@]}"
 
       - name: Set scan result
         id: scan-result
