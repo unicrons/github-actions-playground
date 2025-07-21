@@ -22,4 +22,4 @@ jobs:
         run: |
           echo "🚧 Replace this job with content from workshop/code_scan/{tool}/workflow.yml!"
           echo "This will implement: Code security analysis with your chosen tool"
-          echo "result=workshop-placeholder" >> $GITHUB_OUTPUT
+          echo "result=workshop-placeholder" >> "$GITHUB_OUTPUT"

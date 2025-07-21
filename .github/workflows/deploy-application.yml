@@ -2,15 +2,6 @@ name: Deploy Application
 
 on:
   workflow_call:
-    inputs:
-      environment:
-        description: "Environment to deploy to"
-        required: true
-        type: string
-      image-digest:
-        description: "Container image digest to deploy"
-        required: true
-        type: string
     outputs:
       deployment-result:
         description: "Application deployment result"
@@ -20,37 +11,15 @@ jobs:
   deploy-app:
     name: Deploy Application
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: production
     outputs:
       result: ${{ steps.deploy.outputs.result }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Deploy application
         id: deploy
         run: |
-          echo "🚀 Deploying application to ${{ inputs.environment }}..."
-          echo "Image digest: ${{ inputs.image-digest }}"
-          echo "Updating container image..."
-          echo "Configuring load balancer..."
-          echo "Running database migrations..."
-          echo "Updating environment variables..."
-          echo "result=deployed" >> $GITHUB_OUTPUT
-          echo "✅ Application deployed successfully"
-
-      - name: Health Check
-        run: |
-          echo "🔍 Performing health checks..."
-          echo "Checking application endpoints..."
-          echo "Validating database connectivity..."
-          echo "Testing load balancer..."
-          echo "✅ All health checks passed"
-
-      - name: Deployment Summary
-        run: |
-          echo "📦 Application Deployment Summary:"
-          echo "- Environment: ${{ inputs.environment }}"
-          echo "- Image: ${{ inputs.image-digest }}"
-          echo "- URL: https://workshop-app-${{ inputs.environment }}.example.com"
-          echo "- Status: Healthy"
+          echo "🚀 Deploying to production environment..."
+          echo "📦 Image: workshop-app:${{ github.sha }}"
+          echo "🌐 URL: https://workshop-app-production.example.com"
+          echo "result=deployed" >> "$GITHUB_OUTPUT"
+          echo "✅ Deployment complete!"
