@@ -26,7 +26,6 @@ output "instance_id" {
 output "instance_public_ip" {
   description = "Public IP address of the EC2 instance"
   value       = aws_instance.app.public_ip
-  # Security issue: Exposing sensitive information
 }
 
 output "instance_private_ip" {
@@ -34,9 +33,7 @@ output "instance_private_ip" {
   value       = aws_instance.app.private_ip
 }
 
-# Security issue: Exposing database password in outputs
 output "database_password" {
   description = "Database password"
   value       = var.database_password
-  # sensitive = true
 }
