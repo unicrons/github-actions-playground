@@ -16,36 +16,56 @@ variable "app_name" {
   default     = "workshop-app"
 }
 
-variable "instance_type" {
-  description = "EC2 instance type"
-  type        = string
-  default     = "t3.micro"
+variable "task_cpu" {
+  description = "CPU units for ECS task (1024 = 1 vCPU)"
+  type        = number
+  default     = 256
 }
 
-variable "database_password" {
-  description = "Database password"
+variable "task_memory" {
+  description = "Memory for ECS task in MB"
+  type        = number
+  default     = 512
+}
+
+variable "desired_count" {
+  description = "Desired number of ECS tasks"
+  type        = number
+  default     = 2
+}
+
+variable "ecr_repository_url" {
+  description = "ECR repository URL for the application image"
   type        = string
   default     = ""
 }
 
-variable "allowed_cidr_blocks" {
-  description = "CIDR blocks allowed to access the application"
-  type        = list(string)
-  default     = ["0.0.0.0/0"]
+variable "image_tag" {
+  description = "Docker image tag to deploy"
+  type        = string
+  default     = "latest"
 }
 
-variable "api_key" {
-  description = "Third-party API key"
+variable "load_balancer_name" {
+  description = "Name of the existing Application Load Balancer"
   type        = string
-  default     = "sk_live_1234567890abcdefghijklmnop"
+  default     = "platform-alb"
 }
 
-variable "aws_access_key" {
-  description = "AWS Access Key ID"
+variable "target_group_name" {
+  description = "Name of the existing Target Group"
   type        = string
+  default     = "platform-tg"
 }
 
-variable "aws_secret_key" {
-  description = "AWS Secret Access Key"
+variable "ecr_kms_key_arn" {
+  description = "ARN of the existing KMS key for ECR encryption"
   type        = string
+  default     = ""
+}
+
+variable "logs_kms_key_arn" {
+  description = "ARN of the existing KMS key for CloudWatch logs encryption"
+  type        = string
+  default     = ""
 }
