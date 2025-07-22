@@ -1,0 +1,50 @@
+name: Runtime Security Testing
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "Environment to test"
+        required: true
+        type: string
+      app-url:
+        description: "Application URL to test"
+        required: true
+        type: string
+    outputs:
+      dast-result:
+        description: "DAST scan result"
+        value: ${{ jobs.dast.outputs.result }}
+      load-test-result:
+        description: "Load test result"
+        value: ${{ jobs.load-test.outputs.result }}
+
+jobs:
+  # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
+  # Copy from: workshop/runtime_infra_scan/{tool}/workflow.yml
+  
+  dast:
+    name: "🚧 DAST - Workshop Placeholder"
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.placeholder.outputs.result }}
+    steps:
+      - name: Workshop Placeholder
+        id: placeholder
+        run: |
+          echo "🚧 Replace this job with content from workshop/runtime_infra_scan/{tool}/workflow.yml!"
+          echo "This will implement: DAST security testing with your chosen tool"
+          echo "result=workshop-placeholder" >> "$GITHUB_OUTPUT"
+
+  load-test:
+    name: "🚧 Load Test - Workshop Placeholder"
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.placeholder.outputs.result }}
+    steps:
+      - name: Workshop Placeholder
+        id: placeholder
+        run: |
+          echo "🚧 Replace this job with content from workshop/runtime_infra_scan/{tool}/workflow.yml!"
+          echo "This will implement: Load testing with your chosen tool"
+          echo "result=workshop-placeholder" >> "$GITHUB_OUTPUT"

@@ -26,22 +26,22 @@ Container security scanning analyzes images and container configurations to iden
 2. **Supply Chain** - Untrusted base images
 3. **Access Control** - Improper registry permissions
 
-## Tools Used in This Module #TODO: Update this section
+## Tools Used in This Module
 
-### Vulnerability Scanners:
-- **Trivy** - Comprehensive vulnerability scanner
-- **Grype** - Container vulnerability scanner
-- **Clair** - Static analysis for containers
-- **Snyk Container** - Developer-first container scanning
+### Trivy
+This workshop uses **Trivy** as the primary container vulnerability scanner. Trivy is a comprehensive security scanner that can detect:
+- OS vulnerabilities in container images
+- Language-specific package vulnerabilities
+- Misconfigurations in Dockerfiles
+- Secrets in container images
 
-### Configuration Scanners:
-- **Docker Bench** - CIS Docker benchmark
-- **Hadolint** - Dockerfile linter
-- **Checkov** - Infrastructure as code scanner
+### Workflow Integration
+The container scan is integrated into the build workflow following the **Build → Scan → Push** pattern:
+1. **Build** - Create the container image
+2. **Scan** - Run Trivy vulnerability scanner
+3. **Push** - Only push if scan passes (no CRITICAL/HIGH vulnerabilities)
 
-### Runtime Security:
-- **Falco** - Runtime security monitoring
-- **Sysdig** - Container runtime protection
+This approach implements **shift-left security** by catching vulnerabilities before they reach production registries.
 
 
 ## Learning Objectives

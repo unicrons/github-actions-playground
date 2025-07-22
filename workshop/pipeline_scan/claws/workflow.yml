@@ -2,10 +2,11 @@
 # CLAWS PIPELINE SCAN JOB
 # =============================================================================
 #
+# Claws is a security scanner for GitHub Actions workflows
 # Repository: https://github.com/Betterment/claws
 #
 # TO USE THIS JOB:
-# 1. Copy this entire job definition into .github/workflows/01-pipeline-scan.yml
+# 1. Copy this entire job definition into .github/workflows/pipeline-scan.yml
 # 2. Replace the current jobs: definition with this one 
 # 3. Ensure you have a claws-config.yml file in workshop/pipeline_scan/
 # 4. The job will automatically scan all workflows in .github/workflows/
@@ -13,41 +14,36 @@
 
 jobs:
   pipeline-scan:
-    name: Analyze Github Workflows
+    name: Pipeline Scan with Claws
     runs-on: ubuntu-latest
     outputs:
-      result: ${{ steps.claws.outputs.result }}
+      result: ${{ steps.scan-result.outputs.result }}
     steps:
-      # Set up Ruby environment (required for Claws)
-      - name: Set Up Ruby
-        uses: ruby/setup-ruby@d8d83c3960843afb664e821fed6be52f37da5267 # v1.231.0
-        with:
-          ruby-version: "3.3"
-
-      # Checkout the repository with full history
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Copy the Claws configuration file to temporary location
+      - name: Set Up Ruby
+        uses: ruby/setup-ruby@master
+        with:
+          ruby-version: "3.3"
+
       - name: Set Up Claws Config
         run: |
-          cp workshop/pipeline_scan/claws-config.yml /tmp/claws-config.yml
+          cp workshop/pipeline_scan/claws/claws-config.yml /tmp/claws-config.yml
 
-      # Install Shellcheck (dependency for Claws)
       - name: Set Up Shellcheck
         run: |
           sudo apt-get update
           sudo apt-get install -y shellcheck
 
-      # Install the Claws security scanner
       - name: Set Up Claws
         run: |
           gem install claws-scan -v 0.7.5
 
-      # Run security analysis on all workflow files
-      - name: Analyze Workflows
-        id: claws
+      - name: Run Claws pipeline scanner
+        id: scan-tool
         run: |
           #!/bin/bash
 
@@ -75,12 +71,18 @@ jobs:
           echo ""
           echo "🚀 Running Claws security analysis..."
 
-          # Execute the security analysis and capture result
-          if analyze -f github -c /tmp/claws-config.yml "${flags[@]}"; then
-            echo "result=success" >> $GITHUB_OUTPUT
-            echo "✅ Analysis complete! No security issues detected"
+          # Execute the security analysis
+          analyze -f stdout -c /tmp/claws-config.yml "${flags[@]}"
+
+      - name: Set scan result
+        id: scan-result
+        if: always()
+        run: |
+          if [ "${{ steps.scan-tool.outcome }}" == "success" ]; then
+            echo "result=success" >> "$GITHUB_OUTPUT"
+            echo "✅ Pipeline scan passed - no security issues detected"
           else
-            echo "result=failure" >> $GITHUB_OUTPUT
-            echo "❌ Security issues detected in workflows"
+            echo "result=failure" >> "$GITHUB_OUTPUT"
+            echo "❌ Pipeline scan failed - security issues detected in workflows"
             exit 1
           fi
