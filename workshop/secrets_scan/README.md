@@ -22,40 +22,31 @@ Secrets scan involves scanning code repositories, commit history, and configurat
 
 ### Common Types of Secrets
 
-1. **API Keys** - Third-party service credentials
-2. **Database Passwords** - Database connection strings
-3. **OAuth Tokens** - Authentication tokens
-4. **Private Keys** - SSH keys, TLS certificates
-5. **Cloud Credentials** - AWS access keys, Azure tokens
-6. **Application Secrets** - JWT secrets, encryption keys
-7. **Service Account Keys** - GCP service account JSON files
-
-
-
-1. **Generic Credentials** - Hard-coded passwords, database connection strings, custom tokens, plaintext encryption keys 
-  - 58% of all detected secrets [^1]
-2. **Database Service Credentials** - MongoDB connection strings, MySQL/PostgreSQL credentials (19% of public-repo leaks are MongoDB alone)
-
-3. **Cloud Provider Keys** - AWS IAM access keys, Google Cloud keys, Azure SAS tokens (AWS keys represent 8% of private-repo leaks)
-
-3. **Third-Party API Keys** - Google API, Stripe, Twilio, SendGrid, OpenWeatherMap tokens (over 1M Google API keys leaked in 2023)
-
-4. **Messaging/Bot Tokens** - Telegram Bot tokens, Slack/Discord webhooks (Telegram Bot tokens account for 6.3% of public leaks)
-
-5. **Gen-AI Service Keys** - OpenAI, HuggingFace, Gemini, Pinecone API keys (OpenAI key leaks grew 1,212× year-over-year)
-
-6. **Private Cryptographic Material** - RSA/SSH private keys, JWT signing keys, TLS certificates (RSA private keys consistently rank in top-10 leak types)
-
-7. **OAuth/Personal Access Tokens** - GitHub PATs, GitLab tokens (detected hundreds of times daily, classified as "highly critical" in 41% of cases)
-
+1. **Generic Credentials** - Hard-coded passwords, database connection strings, custom tokens, plaintext encryption keys
+    - 58% of all detected secrets [^1]
+2. **Database Service Credentials** - MongoDB connection strings, MySQL/PostgreSQL credentials
+    - 19% of public-repo leaks are MongoDB alone [^2]
+3. **Cloud Provider Keys** - AWS IAM access keys, Google Cloud keys, Azure SAS tokens
+    - AWS keys represent 8% of private-repo leaks [^2]
+4. **Third-Party API Keys** - Google API, Stripe, Twilio, SendGrid, OpenWeatherMap tokens
+    - OpenWeatherMap tokens among top 10 leaked services [^3]
+5. **Messaging/Bot Tokens** - Telegram Bot tokens, Slack/Discord webhooks
+    - Telegram Bot tokens account for 6.3% of public leaks [^1]
+6. **Gen-AI Service Keys** - OpenAI, HuggingFace, Gemini, Pinecone API keys
+    - OpenAI key leaks grew 1,212× year-over-year [^4]
+7. **Private Cryptographic Material** - RSA/SSH private keys, JWT signing keys, TLS certificates (RSA private keys consistently rank in top-10 leak types)
+    - RSA private keys consistently rank in top-10 leak types
+8. **OAuth/Personal Access Tokens** - GitHub PATs, GitLab tokens
+    - Detected hundreds of times daily, classified as "highly critical" in 41% of cases [^4]
 
 ### Other types of secrets or sensitive data
 There are other types of secrets or sensitive data that may not be covered by the tools we will use in this workshop, but that are still important to keep in mind:
 
 - **Webhooks** - Webhooks are used to trigger actions in other systems, and can be used to trigger malicious actions.
-  - Like Slack webhooks #TODO: Elaborate on this
+  - Like Slack webhooks, that can be used to impersonate a user and send messages to a channel.
 - **AWS Account IDs** - AWS account IDs (or other cloud provider identifiers) can be used to enumerate resources and help attackers to map the attack surface.
   - There's a lot of discussion about if this should be considered a secret or not. [According to AWS they are not](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-identifiers.html), but we think this article from Daniel Grzelak is a good explanation of why they are: [The Final Answer: AWS Account IDs Are Secrets](https://www.plerion.com/blog/the-final-answer-aws-account-ids-are-secrets)
+- **Internal Documents or PII** - PDFs, log files, customer data dumps, identity scans and even bank statements that slip into repos during troubleshooting or demo work.
 
 ## Tools Used in This Module
 
@@ -91,4 +82,10 @@ By the end of this module, you will:
 - [ ] Regular secrets auditing process
 
 ## References
-- [^1]: [Analysis of GitHub Repositories Surfaces Nearly 23M Secrets](https://devops.com/analysis-of-github-repositories-surfaces-nearly-23m-secrets/)
+- [The State of Secrets Sprawl 2025](https://www.gitguardian.com/state-of-secrets-sprawl-report-2025): "In 2024 GitGuardian scanned 69.6M public repositories of which at least 4.61% contained a secret."
+- [How did Openai detect that my API key was pushed to Github?](https://www.reddit.com/r/OpenAI/comments/zotyq4/how_did_openai_detect_that_my_api_key_was_pushed/): Reddit user surprised because OpenAI contacted him seconds after pushing an API key to Github.
+
+[^1]: [23 million secrets spilled on GitHub, developers naively assume no one will know](https://cybernews.com/security/developers-hardcoding-secrets-github-risk/)
+[^2]: [Analysis of GitHub Repositories Surfaces Nearly 23M Secrets](https://devops.com/analysis-of-github-repositories-surfaces-nearly-23m-secrets/)
+[^3]: [Over 12 million auth secrets and keys leaked on GitHub in 2023](https://www.bleepingcomputer.com/news/security/over-12-million-auth-secrets-and-keys-leaked-on-github-in-2023/)
+[^4]: [The State of Secrets Sprawl 2024](https://securityboulevard.com/2024/03/the-state-of-secrets-sprawl-2024/)
