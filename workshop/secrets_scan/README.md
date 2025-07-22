@@ -1,4 +1,4 @@
-# Secrets Scan 
+# Secrets Scan
 
 This workshop module focuses on identifying and preventing the exposure of sensitive credentials, API keys, and other secrets in source code, configuration files, and git history.
 
@@ -6,14 +6,19 @@ This workshop module focuses on identifying and preventing the exposure of sensi
 This is an old problem, but it is still a common one ([specially with the AI surge](https://www.wiz.io/blog/leaking-ai-secrets-in-public-code)). Secrets are the keys to your kingdom. If a password or token is accidentally committed to code, it's immediately at risk, potentially leading to:
 
 - **Data Breaches** - Exposed credentials can lead to unauthorized access
-- **Supply Chain Attacks** - Compromised secrets enable lateral movement
+- **Access to our Systems** - Compromised secrets enable lateral movement
+- **Supply Chain Attacks** - Compromised release artifacts
+
+All of this can lead to:
+
 - **Compliance Issues** - Regulatory requirements for data protection
 - **Financial Loss** - Unauthorized usage of cloud services
 - **Reputation Damage** - Public exposure of security incidents
 
 Secrets scan involves scanning code repositories, commit history, and configuration files to identify exposed credentials such as API keys, passwords, tokens, certificates, and other sensitive information that should not be stored in version control.
 
-Ideally, we should implement this before pushing the code to the repository, using [pre-commit](https://github.com/pre-commit/pre-commit) or similar tools. But accidents happen, so it's important to have a process to detect them in the pipeline as a safety net.
+> [!TIP]
+> Ideally, we should implement this before pushing the code to the repository, using [pre-commit](https://github.com/pre-commit/pre-commit) or similar tools. But accidents happen, so it's important to have a process to detect them in the pipeline as a safety net.
 
 ### Common Types of Secrets
 
@@ -25,13 +30,32 @@ Ideally, we should implement this before pushing the code to the repository, usi
 6. **Application Secrets** - JWT secrets, encryption keys
 7. **Service Account Keys** - GCP service account JSON files
 
+
+
+1. **Generic Credentials** - Hard-coded passwords, database connection strings, custom tokens, plaintext encryption keys 
+  - 58% of all detected secrets [^1]
+2. **Database Service Credentials** - MongoDB connection strings, MySQL/PostgreSQL credentials (19% of public-repo leaks are MongoDB alone)
+
+3. **Cloud Provider Keys** - AWS IAM access keys, Google Cloud keys, Azure SAS tokens (AWS keys represent 8% of private-repo leaks)
+
+3. **Third-Party API Keys** - Google API, Stripe, Twilio, SendGrid, OpenWeatherMap tokens (over 1M Google API keys leaked in 2023)
+
+4. **Messaging/Bot Tokens** - Telegram Bot tokens, Slack/Discord webhooks (Telegram Bot tokens account for 6.3% of public leaks)
+
+5. **Gen-AI Service Keys** - OpenAI, HuggingFace, Gemini, Pinecone API keys (OpenAI key leaks grew 1,212× year-over-year)
+
+6. **Private Cryptographic Material** - RSA/SSH private keys, JWT signing keys, TLS certificates (RSA private keys consistently rank in top-10 leak types)
+
+7. **OAuth/Personal Access Tokens** - GitHub PATs, GitLab tokens (detected hundreds of times daily, classified as "highly critical" in 41% of cases)
+
+
 ### Other types of secrets or sensitive data
 There are other types of secrets or sensitive data that may not be covered by the tools we will use in this workshop, but that are still important to keep in mind:
 
 - **Webhooks** - Webhooks are used to trigger actions in other systems, and can be used to trigger malicious actions.
   - Like Slack webhooks #TODO: Elaborate on this
 - **AWS Account IDs** - AWS account IDs (or other cloud provider identifiers) can be used to enumerate resources and help attackers to map the attack surface.
-  - There's a lot of discussion about if this should be considered a secret or not. #TODO: Elaborate on this, and find references.
+  - There's a lot of discussion about if this should be considered a secret or not. [According to AWS they are not](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-identifiers.html), but we think this article from Daniel Grzelak is a good explanation of why they are: [The Final Answer: AWS Account IDs Are Secrets](https://www.plerion.com/blog/the-final-answer-aws-account-ids-are-secrets)
 
 ## Tools Used in This Module
 
@@ -65,3 +89,6 @@ By the end of this module, you will:
 - [ ] Pre-commit hooks for secrets detection
 - [ ] Rotate compromised credentials immediately
 - [ ] Regular secrets auditing process
+
+## References
+- [^1]: [Analysis of GitHub Repositories Surfaces Nearly 23M Secrets](https://devops.com/analysis-of-github-repositories-surfaces-nearly-23m-secrets/)
