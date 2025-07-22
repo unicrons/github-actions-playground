@@ -11,53 +11,44 @@ This step has its limitations, as some issues can only be detected at runtime, b
 
 ## Common IaC Security Issues
 
-### Access Control:
-1. **Overly Permissive Policies** - Broad IAM permissions
-2. **Public Access** - Resources exposed to the internet
-3. **Missing Authentication** - No access controls
-4. **Weak Passwords** - Default or weak credentials
+A lot of this issues are shared with the [Infrastructure Runtime Security](../runtime_infra_scan/) module.
 
-### Encryption:
-1. **Unencrypted Storage** - Storage without encryption
-2. **Weak Encryption** - Outdated encryption algorithms
-3. **Missing TLS** - Unencrypted data in transit
-4. **Unencrypted Backups** - Backup data without encryption
+### Access Control
+- **Overly Permissive IAM Policies** – wildcard privileges and never-used rights that violate least-privilege.
+- **Publicly Accessible Resources** – buckets, APIs, or DBs left open to the internet.
+- **Missing Authentication Controls** – services deployed with no auth/MFA, allowing unauthenticated calls.
+- **Default or Weak Credentials** – reused passwords and default logins vulnerable to brute-force.
 
-### Network Security:
-1. **Open Security Groups** - 0.0.0.0/0 access rules
-2. **Public Subnets** - Unnecessary public exposure
+### Encryption
+- **Unencrypted Storage at Rest** – plaintext data in S3, EBS, RDS, state files.
+- **Unencrypted Backups & Snapshots** – archives stored without server- or client-side encryption.
+- **Missing TLS/In-Transit Encryption** – APIs or internal links still on plain HTTP or legacy protocols.
+- **Weak or Outdated Cipher Suites** – obsolete algorithms or short keys still in use.
 
-### Compliance:
-1. **Missing Logging** - No audit trails
-2. **No Monitoring** - Missing security alerts
-3. **Backup Issues** - No backup strategies
-4. **Resource Tagging** - Missing cost and security tags
+### Network Security
+- **Open Security Groups (0.0.0.0/0)** – internet-wide access to SSH, RDP, or high-risk custom ports.
+- **Public-Subnet Exposure** – instances or containers with public IPs sitting in public subnets.
+- **Mis-scoped Load Balancers/Endpoints** – “internal” services accidentally reachable from the internet.
 
-## Tools Used in This Module #TODO: Update this section
+### Compliance & Governance
+- **Insufficient Logging & Audit Trails** – generating blind spots for forensics and incident response.
+- **Lack of Continuous Monitoring/Alerts** – misconfigurations persist until breach or audit.
+- **Missing Resource Tagging** – untagged assets break cost, ownership, and policy enforcement.
+- **Improper Backup Retention/Encryption** – backups stored unencrypted or outside mandated retention windows.
 
-### Policy as Code:
+## Common IaC Recommendations
+
+In addition to scanning for infrastructure security issues, we must also ensure the security of our IaC tools and processes. Consider these recommendations:
+
+- **Remote State** - Use encrypted remote backends
+- **State Locking** - Prevent concurrent modifications
+- **Sensitive Variables** - Mark sensitive data appropriately
+- **Provider Versions** - Pin provider versions
+- **Module Security** - Vet third-party modules
+
+## Tools Used in This Module
+
 - **Checkov** - Static analysis for IaC
-- **TFSec** - Terraform security scanner
-- **Terrascan** - Multi-IaC security scanner
-- **Snyk IaC** - Developer-first IaC scanning
-
-### Cloud-Specific Tools:
-- **AWS Config** - AWS resource compliance
-- **Azure Security Center** - Azure security recommendations
-- **Google Security Command Center** - GCP security insights
-
-### Custom Policy Engines:
-- **Open Policy Agent (OPA)** - Policy as code framework
-- **Sentinel** - HashiCorp policy framework
-- **Polaris** - Kubernetes best practices
-
-## Terraform Security Best Practices #TODO: Should we have an annex talking about IaC best practices, from the IaC point of view itself?
-
-1. **Remote State** - Use encrypted remote backends
-2. **State Locking** - Prevent concurrent modifications
-3. **Sensitive Variables** - Mark sensitive data appropriately
-4. **Provider Versions** - Pin provider versions
-5. **Module Security** - Vet third-party modules
 
 ## Learning Objectives
 
@@ -78,11 +69,70 @@ By the end of this module, you will:
 
 ## Security Checklist
 
-- [ ] All resources encrypted at rest and in transit
-- [ ] Least privilege access policies
-- [ ] No hardcoded secrets or credentials
-- [ ] Proper network segmentation
-- [ ] Logging and monitoring enabled
-- [ ] Backup and disaster recovery configured
-- [ ] Resource tagging for governance
-- [ ] Compliance requirements met
+### Access Control
+
+- [ ] Enforce **least privilege** on all IAM roles, users, and service accounts
+- [ ] Remove or refine **overly permissive policies** (wildcards, unused rights)
+- [ ] Disable **default credentials** and enforce strong password requirements
+- [ ] Require **MFA** for all administrative and sensitive accounts
+
+### Encryption
+
+- [ ] Enable **encryption at rest** for all storage, databases, and backups
+- [ ] Require **TLS/SSL** for all data in transit (APIs, internal/external services)
+- [ ] Regularly audit for **outdated cipher suites** or short encryption keys
+- [ ] Encrypt **environment files** and state files containing sensitive data
+
+### Secrets Management
+
+- [ ] Remove all **hardcoded secrets** and credentials from IaC templates and code
+- [ ] Store secrets in a **dedicated vault** or secret manager
+- [ ] Rotate and revoke secrets according to a documented schedule
+- [ ] Ensure CI/CD pipelines and scripts never expose secrets in logs
+
+### Network Security
+
+- [ ] Limit public exposure by closing all unnecessary **Security Groups** (no 0.0.0.0/0)
+- [ ] Place resources in **private subnets** unless public access is specifically required
+- [ ] Implement **network segmentation** with firewalls or network policies
+- [ ] Restrict **east–west traffic** (internal workloads) to the minimum necessary
+
+### Monitoring & Logging
+
+- [ ] Enable **comprehensive logging** (CloudTrail, audit logs, API logs)
+- [ ] Configure **continuous monitoring and alerting** for abnormal activity
+- [ ] Regularly review logs for signs of **unauthorized access or configuration drift**
+- [ ] Ensure logs are retained and protected in accordance with policy
+
+### Backup & Recovery
+
+- [ ] Implement regular **backup schedules** for databases, storage, and state files
+- [ ] **Encrypt all backups** and store copies in geographically separate locations
+- [ ] Test **disaster recovery procedures** periodically
+- [ ] Set **retention policies** that comply with business and regulatory requirements
+
+### Governance & Compliance
+
+- [ ] Tag all resources for **cost tracking, ownership, and lifecycle management**
+- [ ] Enable **automated checks** for regulatory compliance (GDPR, HIPAA, PCI-DSS)
+- [ ] Maintain up-to-date **audit trails** and documentation
+- [ ] Conduct regular **security reviews** and remediation of IaC configurations
+
+### Supply Chain & Container Security
+
+- [ ] Use only **trusted IaC modules** and dependencies—verify source and integrity
+- [ ] Scan all container and base images for **known vulnerabilities**
+- [ ] Restrict use of **public image registries** unless approved and scanned
+- [ ] Set **resource limits** and avoid privileged containers in orchestration
+
+### Change and State Management
+
+- [ ] Store state files in a **remote, encrypted backend** with locked access
+- [ ] Enable **state locking** to prevent concurrent modifications
+- [ ] Enforce **code review and approvals** before IaC changes are applied
+- [ ] Detect and remediate **configuration drift** between infrastructure and code
+
+
+## References
+- [Infrastructure as Code (IaC) Security: 10 Best Practices](https://spacelift.io/blog/infrastructure-as-code-iac-security)
+- [The Hidden Risk in Your Cloud Stack: How Overlooked AWS Resources Become Entry Points for Hackers](https://cloudsecurityalliance.org/blog/2025/05/22/the-hidden-risk-in-your-cloud-stack-how-overlooked-aws-resources-become-entry-points-for-hackers#)
