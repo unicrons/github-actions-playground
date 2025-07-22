@@ -1,25 +1,22 @@
-# Security issue: Using outdated base image
-FROM node:16
+FROM node:16.14.0-alpine
 
-# Security issue: Running as root user (no USER directive)
-# Security issue: Not setting working directory properly
+RUN addgroup -g 1001 -S nodejs && \
+  adduser -S nextjs -u 1001 -G nodejs
+
 WORKDIR /app
 
-# Security issue: Copying everything including sensitive files
-COPY . .
+COPY package*.json ./
 
-# Security issue: Installing packages with npm install (not npm ci)
-# Security issue: Installing as root
-RUN npm install
+RUN npm ci --only=production && \
+  npm cache clean --force
 
-# Security issue: Exposing unnecessary port
+COPY --chown=nextjs:nodejs src/ ./src/
+
 EXPOSE 3000
-EXPOSE 22
 
-# Security issue: No health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
 
-# Security issue: Running application as root
-# Missing: USER non-root-user
+USER nextjs
 
-# Security issue: Using shell form of CMD (can lead to signal handling issues)
-CMD npm start
+CMD ["npm", "start"]
