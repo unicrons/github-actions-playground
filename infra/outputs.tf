@@ -1,39 +1,24 @@
-output "vpc_id" {
-  description = "ID of the VPC"
-  value       = aws_vpc.main.id
+output "load_balancer_dns" {
+  description = "DNS name of the existing load balancer"
+  value       = data.aws_lb.existing.dns_name
 }
 
-output "public_subnet_ids" {
-  description = "IDs of the public subnets"
-  value       = aws_subnet.public[*].id
+output "load_balancer_url" {
+  description = "URL of the application"
+  value       = "http://${data.aws_lb.existing.dns_name}"
 }
 
-output "private_subnet_ids" {
-  description = "IDs of the private subnets"
-  value       = aws_subnet.private[*].id
+output "ecr_repository_url" {
+  description = "ECR repository URL"
+  value       = aws_ecr_repository.app.repository_url
 }
 
-output "app_security_group_id" {
-  description = "ID of the application security group"
-  value       = aws_security_group.app.id
+output "ecs_cluster_name" {
+  description = "Name of the ECS cluster"
+  value       = aws_ecs_cluster.app.name
 }
 
-output "instance_id" {
-  description = "ID of the EC2 instance"
-  value       = aws_instance.app.id
-}
-
-output "instance_public_ip" {
-  description = "Public IP address of the EC2 instance"
-  value       = aws_instance.app.public_ip
-}
-
-output "instance_private_ip" {
-  description = "Private IP address of the EC2 instance"
-  value       = aws_instance.app.private_ip
-}
-
-output "database_password" {
-  description = "Database password"
-  value       = var.database_password
+output "ecs_service_name" {
+  description = "Name of the ECS service"
+  value       = aws_ecs_service.app.name
 }
