@@ -10,39 +10,22 @@ Container security scanning analyzes images and container configurations to iden
 ## Common Container Security Issues
 
 ### Image Vulnerabilities:
-1. **Base Image CVEs** - Known vulnerabilities in base operating systems
-2. **Package Vulnerabilities** - Outdated or vulnerable packages
-3. **Malware** - Malicious software in images
-4. **Secrets in Images** - Embedded credentials or keys
+1. **Image Vulnerabilities** - Outdated or vulnerable dependencies, both in the base image and in the application dependencies.
+2. **Supply Chain** - Untrusted base images. Trojanized or typo-squatted images pulled from public registries.
+3. **Secrets in Images** - Hardcoded credentials or keys.
 
 ### Configuration Issues:
 1. **Root User** - Running containers as root
-2. **Excessive Privileges** - Unnecessary capabilities
+2. **Excessive Privileges** - Unnecessary capabilities can allow container escape.
 3. **Exposed Ports** - Unintended network exposure
 4. **Missing Security Controls** - No health checks or resource limits
-
-### Registry Security:
-1. **Image Integrity** - Unsigned or tampered images
-2. **Supply Chain** - Untrusted base images
-3. **Access Control** - Improper registry permissions
+5. **Weak Network Segmentation** - Overly permissive ingress rules allow lateral movement
+6. **Dangerous Volumes** - Mounting host volumes can expose sensitive data or allow privilege escalation.
 
 ## Tools Used in This Module
 
-### Trivy
-This workshop uses **Trivy** as the primary container vulnerability scanner. Trivy is a comprehensive security scanner that can detect:
-- OS vulnerabilities in container images
-- Language-specific package vulnerabilities
-- Misconfigurations in Dockerfiles
-- Secrets in container images
-
-### Workflow Integration
-The container scan is integrated into the build workflow following the **Build → Scan → Push** pattern:
-1. **Build** - Create the container image
-2. **Scan** - Run Trivy vulnerability scanner
-3. **Push** - Only push if scan passes (no CRITICAL/HIGH vulnerabilities)
-
-This approach implements **shift-left security** by catching vulnerabilities before they reach production registries.
-
+- **Trivy** - Vulnerability, misconfiguration and secret scanner for containers.
+  - It also supports scanning filesystems or repos, but we will focus on containers.
 
 ## Learning Objectives
 
@@ -61,26 +44,23 @@ By the end of this module, you will:
 4. Learn to interpret scanner results
 5. Implement security fixes and best practices
 
-## Container Security Best Practices #TODO: Should we merge this with the checklist?
-
-- Use minimal base images (distroless, alpine)
-- Run containers as non-root users
-- Implement proper health checks
-- Use multi-stage builds to reduce attack surface
-- Regularly update base images
-- Sign and verify image integrity
-- Implement runtime security monitoring
-
 ## Security Checklist
 
-- [ ] Use minimal base images (distroless, alpine)
-- [ ] Base image vulnerabilities addressed
-- [ ] No high/critical CVEs in final image
-- [ ] Container runs as non-root user
-- [ ] Minimal attack surface
-- [ ] Health checks implemented
-- [ ] Multi-stage builds to reduce attack surface
-- [ ] Regularly update base images
-- [ ] Security scanning in CI/CD
-- [ ] Image signing and verification
-- [ ] Runtime security monitoring
+- [ ] **Use minimal, trusted base images** and rebuild them regularly.
+- [ ] **Patch all High/Critical CVEs** before shipping; fail the build if any remain.
+  - Note: You can also ignore them if you verified the vulnerability is not exploitable.
+- [ ] **Run containers as a non-root user** with only the capabilities they truly need.
+- [ ] **Remove build tools & secrets** via multi-stage builds to shrink the attack surface.
+- [ ] **Sign images and verify signatures** at pull/admission time to ensure provenance.
+- [ ] **Enable runtime protection** ([seccomp](https://docs.docker.com/engine/security/seccomp/)/[AppArmor](https://docs.docker.com/engine/security/apparmor/) profiles, resource limits, live detection).
+- [ ] **Implement health and readiness checks**
+
+
+
+## References
+- [NetRise Releases Supply Chain Visibility & Risk Study, Edition 2: Containers, Revealing Signicant Visibility and Risk Challenges within Common Containers](https://www.netrise.io/en/company/announcements/netrise-releases-supply-chain-visibility-risk-study-revealing-signicant-visibility-and-risk-challenges-within-common-containers): Research finds containers have over 600 vulnerabilities a piece on average.
+- [Top 10 Container Security Issues](https://www.sentinelone.com/cybersecurity-101/cloud-security/container-security-issues/)
+- [Docker Engine security](https://docs.docker.com/engine/security/)
+
+### Other Tools
+- [slimtoolkit/slim](https://github.com/slimtoolkit/slim): Tool to reduce the size of container images (making them more secure).
