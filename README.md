@@ -85,11 +85,10 @@ By completing this workshop, you will:
 - Be able to build secure, automated pipelines
 
 ---
----
 
 ## 🔧 Sample Application
 
-The workshop includes a intentionally vulnerable Node.js application with:
+The workshop includes an intentionally vulnerable Node.js application with:
 - Hardcoded secrets and credentials
 - SQL injection vulnerabilities
 - Authentication bypasses

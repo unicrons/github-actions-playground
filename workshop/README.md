@@ -33,7 +33,7 @@ Shift-left security is a security practice that aims to move security checks and
 ## Workshop Goals
 The idea of this workshop is to demonstrate how to build a "perfect" (secure and practical) CI/CD pipeline using open-source tools (OSS).
 
-The goal is inspirational, not prescriptive. We do not want you to copy this examples, but to understand the principles and identify the modular components you can adapt to implement in your own environment.
+The goal is inspirational, not prescriptive. We do not want you to copy these examples, but to understand the principles and identify the modular components you can adapt to implement in your own environment.
 
 ### Learning Outcomes
 - Understand the key stages of a secure pipeline

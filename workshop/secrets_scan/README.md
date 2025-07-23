@@ -3,7 +3,7 @@
 This workshop module focuses on identifying and preventing the exposure of sensitive credentials, API keys, and other secrets in source code, configuration files, and git history.
 
 ## Why is Secrets Scan Important?
-This is an old problem, but it is still a common one ([specially with the AI surge](https://www.wiz.io/blog/leaking-ai-secrets-in-public-code)). Secrets are the keys to your kingdom. If a password or token is accidentally committed to code, it's immediately at risk, potentially leading to:
+This is an old problem, but it is still a common one ([especially with the AI surge](https://www.wiz.io/blog/leaking-ai-secrets-in-public-code)). Secrets are the keys to your kingdom. If a password or token is accidentally committed to code, it's immediately at risk, potentially leading to:
 
 - **Data Breaches** - Exposed credentials can lead to unauthorized access
 - **Access to our Systems** - Compromised secrets enable lateral movement
@@ -34,7 +34,7 @@ Secrets scan involves scanning code repositories, commit history, and configurat
     - Telegram Bot tokens account for 6.3% of public leaks [^1]
 6. **Gen-AI Service Keys** - OpenAI, HuggingFace, Gemini, Pinecone API keys
     - OpenAI key leaks grew 1,212× year-over-year [^4]
-7. **Private Cryptographic Material** - RSA/SSH private keys, JWT signing keys, TLS certificates (RSA private keys consistently rank in top-10 leak types)
+7. **Private Cryptographic Material** - RSA/SSH private keys, JWT signing keys, TLS certificates
     - RSA private keys consistently rank in top-10 leak types
 8. **OAuth/Personal Access Tokens** - GitHub PATs, GitLab tokens
     - Detected hundreds of times daily, classified as "highly critical" in 41% of cases [^4]
