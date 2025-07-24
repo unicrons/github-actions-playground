@@ -11,11 +11,11 @@ Continuous runtime scanning helps ensure your infrastructure remains secure afte
 
 ## Common Runtime Infrastructure Issues
 
-1. **Misconfigurations** - Public exposed resources, weak IAM policies, unrestricted security groups
-2. **IAM vulnerabilities** - Credential theft, privilege escalation, brute force attacks
-3. **Insecure APIs and Interfaces** - API key leaks, MITM attacks, rate-limiting bypass
-4. **Data Breaches and Exfiltration** - Unencrypted data exposure, insider threats, SQL injection attacks.
-5. **Inadequate Monitoring and Logging** - Log tampering, cryptojacking, lack of real-time alerts
+- **Misconfigurations** - Public exposed resources, weak IAM policies, unrestricted security groups
+- **IAM vulnerabilities** - Credential theft, privilege escalation, brute force attacks
+- **Insecure APIs and Interfaces** - API key leaks, MITM attacks, rate-limiting bypass
+- **Data Breaches and Exfiltration** - Unencrypted data exposure, insider threats, SQL injection attacks.
+- **Inadequate Monitoring and Logging** - Log tampering, cryptojacking, lack of real-time alerts
 
 ## Tools Used in This Module
 

@@ -10,17 +10,17 @@ Container security scanning analyzes images and container configurations to iden
 ## Common Container Security Issues
 
 ### Image Vulnerabilities:
-1. **Image Vulnerabilities** - Outdated or vulnerable dependencies, both in the base image and in the application dependencies.
-2. **Supply Chain** - Untrusted base images. Trojanized or typo-squatted images pulled from public registries.
-3. **Secrets in Images** - Hardcoded credentials or keys.
+- **Image Vulnerabilities** - Outdated or vulnerable dependencies, both in the base image and in the application dependencies.
+- **Supply Chain** - Untrusted base images. Trojanized or typo-squatted images pulled from public registries.
+- **Secrets in Images** - Hardcoded credentials or keys.
 
 ### Configuration Issues:
-1. **Root User** - Running containers as root
-2. **Excessive Privileges** - Unnecessary capabilities can allow container escape.
-3. **Exposed Ports** - Unintended network exposure
-4. **Missing Security Controls** - No health checks or resource limits
-5. **Weak Network Segmentation** - Overly permissive ingress rules allow lateral movement
-6. **Dangerous Volumes** - Mounting host volumes can expose sensitive data or allow privilege escalation.
+- **Root User** - Running containers as root
+- **Excessive Privileges** - Unnecessary capabilities can allow container escape.
+- **Exposed Ports** - Unintended network exposure
+- **Missing Security Controls** - No health checks or resource limits
+- **Weak Network Segmentation** - Overly permissive ingress rules allow lateral movement
+- **Dangerous Volumes** - Mounting host volumes can expose sensitive data or allow privilege escalation.
 
 ## Tools Used in This Module
 

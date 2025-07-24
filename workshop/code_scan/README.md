@@ -17,18 +17,18 @@ Malicious actors can exploit vulnerabilities in your code to gain unauthorized a
 ## Common Code Security Issues
 
 ### SAST Findings:
-1. **SQL Injection** - Unsafe database queries
-2. **Cross-Site Scripting (XSS)** - Unvalidated user input
-3. **Authentication Flaws** - Weak authentication mechanisms
-4. **Authorization Issues** - Missing access controls
-5. **Hardcoded Secrets** - Credentials in source code
-6. **Input Validation** - Missing or improper validation
+- **SQL Injection** - Unsafe database queries
+- **Cross-Site Scripting (XSS)** - Unvalidated user input
+- **Authentication Flaws** - Weak authentication mechanisms
+- **Authorization Issues** - Missing access controls
+- **Hardcoded Secrets** - Credentials in source code
+- **Input Validation** - Missing or improper validation
 
 ### SCA Findings:
-1. **Known Vulnerabilities** - CVEs in dependencies
-2. **Outdated Packages** - Dependencies with security updates
-3. **License Issues** - Non-compliant licenses
-4. **Supply Chain Risks** - Malicious packages
+- **Known Vulnerabilities** - CVEs in dependencies
+- **Outdated Packages** - Dependencies with security updates
+- **License Issues** - Non-compliant licenses
+- **Supply Chain Risks** - Malicious packages
 
 ## Tools Used in This Module
 

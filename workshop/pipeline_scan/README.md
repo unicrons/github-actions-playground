@@ -10,11 +10,11 @@ Pipeline security scanning analyzes your CI/CD workflows, configurations, and au
 
 ## Common Pipeline Security Issues
 
-1. **Hardcoded Secrets in Workflows** - API keys, passwords, or tokens hardcoded in YAML files
-2. **Excessive Permissions** - Workflows with unnecessary write permissions
-3. **Untrusted Actions** - Using third-party actions without proper verification
-4. **Insecure Triggers** - Workflows triggered by external events without validation
-5. **Missing Security Controls** - No approval processes for sensitive operations
+- **Hardcoded Secrets in Workflows** - API keys, passwords, or tokens hardcoded in YAML files
+- **Excessive Permissions** - Workflows with unnecessary write permissions
+- **Untrusted Actions** - Using third-party actions without proper verification
+- **Insecure Triggers** - Workflows triggered by external events without validation
+- **Missing Security Controls** - No approval processes for sensitive operations
 
 ## Tools Used in This Module
 

@@ -22,21 +22,21 @@ Secrets scan involves scanning code repositories, commit history, and configurat
 
 ### Common Types of Secrets
 
-1. **Generic Credentials** - Hard-coded passwords, database connection strings, custom tokens, plaintext encryption keys
+- **Generic Credentials** - Hard-coded passwords, database connection strings, custom tokens, plaintext encryption keys
     - 58% of all detected secrets [^1]
-2. **Database Service Credentials** - MongoDB connection strings, MySQL/PostgreSQL credentials
+- **Database Service Credentials** - MongoDB connection strings, MySQL/PostgreSQL credentials
     - 19% of public-repo leaks are MongoDB alone [^2]
-3. **Cloud Provider Keys** - AWS IAM access keys, Google Cloud keys, Azure SAS tokens
+- **Cloud Provider Keys** - AWS IAM access keys, Google Cloud keys, Azure SAS tokens
     - AWS keys represent 8% of private-repo leaks [^2]
-4. **Third-Party API Keys** - Google API, Stripe, Twilio, SendGrid, OpenWeatherMap tokens
+- **Third-Party API Keys** - Google API, Stripe, Twilio, SendGrid, OpenWeatherMap tokens
     - OpenWeatherMap tokens among top 10 leaked services [^3]
-5. **Messaging/Bot Tokens** - Telegram Bot tokens, Slack/Discord webhooks
+- **Messaging/Bot Tokens** - Telegram Bot tokens, Slack/Discord webhooks
     - Telegram Bot tokens account for 6.3% of public leaks [^1]
-6. **Gen-AI Service Keys** - OpenAI, HuggingFace, Gemini, Pinecone API keys
+- **Gen-AI Service Keys** - OpenAI, HuggingFace, Gemini, Pinecone API keys
     - OpenAI key leaks grew 1,212× year-over-year [^4]
-7. **Private Cryptographic Material** - RSA/SSH private keys, JWT signing keys, TLS certificates
+- **Private Cryptographic Material** - RSA/SSH private keys, JWT signing keys, TLS certificates
     - RSA private keys consistently rank in top-10 leak types
-8. **OAuth/Personal Access Tokens** - GitHub PATs, GitLab tokens
+- **OAuth/Personal Access Tokens** - GitHub PATs, GitLab tokens
     - Detected hundreds of times daily, classified as "highly critical" in 41% of cases [^4]
 
 ### Other types of secrets or sensitive data
