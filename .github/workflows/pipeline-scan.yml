@@ -29,8 +29,8 @@ jobs:
       - name: Auth to AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: eu-north-1
+          aws-region: ${{ vars.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/warden-production
 
       - name: Init
-        run: aws s3 cp s3://warden-easter-egg-c4bak76z/easter_egg.txt -
+        run: aws s3 ls
