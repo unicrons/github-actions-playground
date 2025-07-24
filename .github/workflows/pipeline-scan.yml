@@ -32,6 +32,7 @@ jobs:
 
       - name: Run Prowler
         id: prowler
+        # uses: docker://prowlercloud/prowler:stable
         run: |
             prowler aws
         continue-on-error: true
