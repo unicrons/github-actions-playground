@@ -20,11 +20,8 @@ on:
         value: ${{ jobs.load-test.outputs.result }}
 
 jobs:
-  # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
-  # Copy from: workshop/runtime_infra_scan/{tool}/workflow.yml
-  
-  dast:
-    name: "🚧 DAST - Workshop Placeholder"
+  iac-scan:
+    name: "🚧 Workshop Placeholder"
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.placeholder.outputs.result }}
@@ -32,19 +29,6 @@ jobs:
       - name: Workshop Placeholder
         id: placeholder
         run: |
-          echo "🚧 Replace this job with content from workshop/runtime_infra_scan/{tool}/workflow.yml!"
-          echo "This will implement: DAST security testing with your chosen tool"
-          echo "result=workshop-placeholder" >> "$GITHUB_OUTPUT"
-
-  load-test:
-    name: "🚧 Load Test - Workshop Placeholder"
-    runs-on: ubuntu-latest
-    outputs:
-      result: ${{ steps.placeholder.outputs.result }}
-    steps:
-      - name: Workshop Placeholder
-        id: placeholder
-        run: |
-          echo "🚧 Replace this job with content from workshop/runtime_infra_scan/{tool}/workflow.yml!"
-          echo "This will implement: Load testing with your chosen tool"
+          echo "🚧 Replace this job with content from workshop/iac_scan/{tool}/workflow.yml!"
+          echo "This will implement: Infrastructure security scan with your chosen tool"
           echo "result=workshop-placeholder" >> "$GITHUB_OUTPUT"
