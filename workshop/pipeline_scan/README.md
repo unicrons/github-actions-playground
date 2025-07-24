@@ -10,11 +10,11 @@ Pipeline security scanning analyzes your CI/CD workflows, configurations, and au
 
 ## Common Pipeline Security Issues
 
-1. **Secrets in Workflows** - API keys, passwords, or tokens hardcoded in YAML files
-2. **Excessive Permissions** - Workflows with unnecessary write permissions
-3. **Untrusted Actions** - Using third-party actions without proper verification
-4. **Insecure Triggers** - Workflows triggered by external events without validation
-5. **Missing Security Controls** - No approval processes for sensitive operations
+- **Hardcoded Secrets in Workflows** - API keys, passwords, or tokens hardcoded in YAML files
+- **Excessive Permissions** - Workflows with unnecessary write permissions
+- **Untrusted Actions** - Using third-party actions without proper verification
+- **Insecure Triggers** - Workflows triggered by external events without validation
+- **Missing Security Controls** - No approval processes for sensitive operations
 
 ## Tools Used in This Module
 
@@ -37,15 +37,15 @@ By the end of this module, you will:
 
 ## Security Checklist
 
-- [ ] No secrets in workflow files
-- [ ] Minimal required permissions
+- [ ] No hardcoded secrets in workflow files
+- [ ] Minimal required permissions to run the actions
 - [ ] Pinned action versions
 - [ ] Secure triggers and conditions
 - [ ] Environment protection rules
 - [ ] Audit logging enabled
 
 
-### References
+## References
 - [GitHub Action tj-actions/changed-files supply chain attack: everything you need to know](https://www.wiz.io/blog/github-action-tj-actions-changed-files-supply-chain-attack-cve-2025-30066): A supply chain attack on popular GitHub Action tj-actions/changed-files caused many repositories to leak their secrets.
 - [GitHub Actions Attack Diagram](https://github.com/jstawinski/GitHub-Actions-Attack-Diagram/blob/main/GitHub%20Actions%20Attack%20Diagram.svg): GitHub Actions Attack Diagram provides guidance for identifying GitHub Actions vulnerabilities.
 - [How to Harden GitHub Actions: The Unofficial Guide](https://www.wiz.io/blog/github-actions-security-guide): A guide to hardening GitHub Actions.

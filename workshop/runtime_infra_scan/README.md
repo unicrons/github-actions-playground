@@ -11,21 +11,16 @@ Continuous runtime scanning helps ensure your infrastructure remains secure afte
 
 ## Common Runtime Infrastructure Issues
 
-1. **Unpatched Systems** – Outdated OS or software with known vulnerabilities
-2. **Open Ports/Services** – Unnecessary or insecurely exposed network services
-3. **Weak Authentication** – Default or weak credentials on cloud resources
-4. **Misconfigured Security Groups/Firewalls** – Overly permissive access
-5. **Missing Encryption** – Data at rest or in transit not properly encrypted
-6. **Publicly Exposed Resources** – Databases, storage buckets, or admin interfaces accessible from the internet
-7. **Lack of Monitoring/Logging** – Insufficient visibility into activity and incidents
+- **Misconfigurations** - Public exposed resources, weak IAM policies, unrestricted security groups
+- **IAM vulnerabilities** - Credential theft, privilege escalation, brute force attacks
+- **Insecure APIs and Interfaces** - API key leaks, MITM attacks, rate-limiting bypass
+- **Data Breaches and Exfiltration** - Unencrypted data exposure, insider threats, SQL injection attacks.
+- **Inadequate Monitoring and Logging** - Log tampering, cryptojacking, lack of real-time alerts
 
-## Tools Used in This Module #TODO: Update this section
+## Tools Used in This Module
 
-- **Trivy** – Can scan cloud resources for misconfigurations and vulnerabilities
-- **Scout Suite** – Multi-cloud security auditing tool
-- **Prowler** – AWS security best practices assessment
-- **CloudSploit** – Cloud account configuration scanner
-- **AWS Inspector / Azure Security Center / GCP Security Command Center** – Native cloud provider tools for runtime security
+- **Prowler** – Perform security best practices assessments for multiple cloud providers (AWS, Azure, GCP, M365, Github and more).
+  - It can be used also for continuous monitoring and remediation, but we will focus on the assessment part.
 
 ## Learning Objectives
 
@@ -54,3 +49,6 @@ By the end of this module, you will:
 - [ ] Monitoring and logging enabled for all critical resources
 - [ ] Regular runtime scans scheduled and reviewed
 
+## References
+- [Prowler’s State of Cloud Security Report 2025](https://prowler.com/blog/cloud-security-report-2025/)
+- [Top cloud misconfigurations: A CSPM perspective](https://sysdig.com/blog/top-cloud-misconfigurations/)
