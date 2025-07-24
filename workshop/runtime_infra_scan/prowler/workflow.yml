@@ -1,0 +1,70 @@
+# =============================================================================
+# PROWLER INFRASTRUCTURE SCAN JOB
+# =============================================================================
+#
+# Prowler is a security scanner for Cloud Infrastructure
+# Repository: https://github.com/prowler-cloud/prowler
+#
+# PREREQUISITES:
+# - An AWS IAM role with the following policies:
+#   - `arn:aws:iam::aws:policy/SecurityAudit`
+#   - `arn:aws:iam::aws:policy/job-function/ViewOnlyAccess`
+#     - More info about it in https://docs.prowler.com/projects/prowler-open-source/en/latest/tutorials/aws/authentication/
+# - Configure role arn as secret in the repository, called `AWS_IAM_ROLE_ARN`
+# - Configure AWS Region as variable in the repository, called `AWS_REGION`
+# - Configure AWS IAM Role Session Duration as variable in the repository (default: 3600 seconds), called `AWS_IAM_ROLE_SESSION_DURATION`
+#
+# TO USE THIS JOB:
+# 1. Copy this entire job definition into .github/workflows/runtime-infra-scan.yml
+# 2. Replace the current jobs: definition with this one
+# 3. The job will automatically scan all terraform files in infra/
+# 4. The scan will fail if any security issues are found in the infrastructure
+# =============================================================================
+
+jobs:
+  runtime-infra-scan:
+    name: Runtime Infrastructure Scan with Prowler
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.scan-result.outputs.result }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+            role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
+            role-session-name: ProwlerSession
+            aws-region: ${{ vars.AWS_REGION }}
+            role-duration-seconds: ${{ vars.AWS_IAM_ROLE_SESSION_DURATION }}
+
+      - name: Install Prowler
+        run: |
+            pipx install prowler
+            prowler -v
+
+      - name: Run Prowler
+        id: prowler
+        run: |
+            prowler aws --service iam s3
+        continue-on-error: true
+
+      - name: Message
+        run: |
+            echo "Prowler run completed"
+
+      - name: Set scan result
+        id: scan-result
+        if: always()
+        run: |
+          if [ "${{ steps.prowler.outcome }}" == "success" ]; then
+            echo "result=success" >> "$GITHUB_OUTPUT"
+            echo "✅ Pipeline scan passed"
+          else
+            echo "result=failure" >> "$GITHUB_OUTPUT"
+            echo "❌ Pipeline scan failed"
+          fi
+

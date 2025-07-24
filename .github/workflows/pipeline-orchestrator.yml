@@ -48,7 +48,7 @@ jobs:
 
   runtime-infra-scan:
     needs: deploy-application
-    if: github.ref == 'refs/heads/runtime-infra'
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/runtime-infra-scan.yml
     with:
       environment: staging
