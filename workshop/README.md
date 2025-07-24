@@ -18,7 +18,9 @@ Related to pipelines, you have probably heard about the concepts of Continuous I
 
 - **Continuous Security (CS)**: This is the crucial next step in the evolution, embedding security into the process. It means automating security controls and tests throughout the pipeline, just like we do for quality, to find vulnerabilities when they are cheapest and easiest to fix.
 
-
+<p align="center">
+<img src="./imgs/CI_CD_CS.png" alt="CI/CD/CS" width="500">
+</p>
 
 ### What is Shift-Left Security?
 
@@ -26,7 +28,7 @@ Shift-left security is a security practice that aims to move security checks and
 
 <p align="center">
 <img src="./imgs/shift-left.png" alt="Shift-Left Security" width="800">
-<p><em>Based on the image from https://devopedia.org/shift-left</em></p>
+<p align="center"><em>Based on the image from https://devopedia.org/shift-left</em></p>
 </p>
 
 
