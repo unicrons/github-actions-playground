@@ -38,3 +38,11 @@ ehthumbs.db
 Thumbs.db
 .vscode
 .env
+
+# Terraform Files
+.terraform*
+terraform.tfstate*
+
+# WardenRuseReturns Terraform files
+workshop/pipeline_scan/extra/WardenRuseReturns/s3.tf
+workshop/pipeline_scan/extra/WardenRuseReturns/policy.tf
