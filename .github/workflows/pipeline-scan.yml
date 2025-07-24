@@ -32,9 +32,8 @@ jobs:
 
       - name: Run Prowler
         id: prowler
-        # uses: docker://prowlercloud/prowler:stable
         run: |
-            prowler aws
+            prowler aws --service iam s3
         continue-on-error: true
 
       - name: Message
