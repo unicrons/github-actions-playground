@@ -12,6 +12,9 @@ on:
         required: true
         type: string
     outputs:
+      runtime-infra-scan-result:
+        description: "Runtime infrastructure scan result"
+        value: ${{ jobs.runtime-infra-scan.outputs.result }}
       dast-result:
         description: "DAST scan result"
         value: ${{ jobs.dast.outputs.result }}
@@ -22,7 +25,19 @@ on:
 jobs:
   # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
   # Copy from: workshop/runtime_infra_scan/{tool}/workflow.yml
-  
+  runtime-infra-scan:
+    name: "🚧 Runtime Infrastructure Scan - Workshop Placeholder"
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.placeholder.outputs.result }}
+    steps:
+      - name: Workshop Placeholder
+        id: placeholder
+        run: |
+          echo "🚧 Replace this job with content from workshop/runtime_infra_scan/{tool}/workflow.yml!"
+          echo "This will implement: Runtime infrastructure scan with your chosen tool"
+          echo "result=workshop-placeholder" >> "$GITHUB_OUTPUT"
+
   dast:
     name: "🚧 DAST - Workshop Placeholder"
     runs-on: ubuntu-latest
@@ -36,6 +51,7 @@ jobs:
           echo "This will implement: DAST security testing with your chosen tool"
           echo "result=workshop-placeholder" >> "$GITHUB_OUTPUT"
 
+  # TODO: Move this to a separate workflow
   load-test:
     name: "🚧 Load Test - Workshop Placeholder"
     runs-on: ubuntu-latest

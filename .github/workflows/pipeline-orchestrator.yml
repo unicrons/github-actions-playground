@@ -13,6 +13,7 @@ permissions:
 jobs:
   pipeline-scan:
     uses: ./.github/workflows/pipeline-scan.yml
+    secrets: inherit
 
   code-scan:
     needs: pipeline-scan
