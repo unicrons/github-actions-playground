@@ -17,11 +17,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Install Prowler
-        run: |
-            pipx install prowler
-            prowler -v
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
@@ -29,6 +24,11 @@ jobs:
             role-session-name: ProwlerSession
             aws-region: ${{ vars.AWS_REGION }}
             role-duration-seconds: ${{ vars.AWS_IAM_ROLE_SESSION_DURATION }}
+
+      - name: Install Prowler
+        run: |
+            pipx install prowler
+            prowler -v
 
       - name: Run Prowler
         id: prowler
