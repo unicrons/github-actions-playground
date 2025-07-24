@@ -10,7 +10,7 @@ on:
 jobs:
   # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
   # Copy from: workshop/code_scan/{tool}/workflow.yml
-  
+
   code-scan:
     name: "🚧 Code Scan - Workshop Placeholder"
     runs-on: ubuntu-latest

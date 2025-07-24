@@ -10,7 +10,7 @@ on:
 jobs:
   # 🚧 REPLACE THIS ENTIRE 'jobs:' SECTION WITH WORKSHOP CONTENT! 🚧
   # Copy from: workshop/pipeline_scan/{tool}/workflow.yml
-  
+
   pipeline-scan:
     name: "🚧 Pipeline Scan - Workshop Placeholder"
     runs-on: ubuntu-latest

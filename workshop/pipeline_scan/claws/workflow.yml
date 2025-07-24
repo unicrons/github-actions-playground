@@ -7,7 +7,7 @@
 #
 # TO USE THIS JOB:
 # 1. Copy this entire job definition into .github/workflows/pipeline-scan.yml
-# 2. Replace the current jobs: definition with this one 
+# 2. Replace the current jobs: definition with this one
 # 3. Ensure you have a claws-config.yml file in workshop/pipeline_scan/
 # 4. The job will automatically scan all workflows in .github/workflows/
 # =============================================================================
@@ -27,7 +27,7 @@ jobs:
       - name: Set Up Ruby
         uses: ruby/setup-ruby@master
         with:
-          ruby-version: "3.3"
+          ruby-version: '3.3'
 
       - name: Set Up Claws Config
         run: |
