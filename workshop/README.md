@@ -39,7 +39,7 @@ We suggest you follow the workshop in the following order, but feel free to jump
 2. [Code Security Analysis](code_scan/)
 3. [Secrets Scan](secrets_scan/)
 4. [Container Security Scanning](container_scan/)
-5. [Infrastructure Security Scan](iac_scan/)
+5. [Infrastructure as Code Security Scan](iac_scan/)
 6. [Runtime Infrastructure Scan](runtime_infra_scan/)
 
 ## Workshop flow

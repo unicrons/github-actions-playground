@@ -27,16 +27,7 @@ Continuous runtime scanning helps ensure your infrastructure remains secure afte
 By the end of this module, you will:
 - Understand the importance of runtime infrastructure scanning
 - Learn to use automated tools to assess live cloud environments
-- Identify and prioritize runtime security issues
-- Integrate runtime scanning into your CI/CD pipeline
 
-## Workshop Exercise
-
-1. Run a runtime infrastructure scan using one or more of the listed tools
-2. Review the scan results for vulnerabilities and misconfigurations
-3. Prioritize findings based on risk and exposure
-4. Implement fixes for critical issues
-5. Re-scan to verify remediation
 
 ## Security Checklist
 

@@ -32,17 +32,8 @@ Container security scanning analyzes images and container configurations to iden
 By the end of this module, you will:
 - Understand container security risks
 - Learn to scan images for vulnerabilities
-- Identify Dockerfile security best practices
 - Understand supply chain security for containers
-- Learn to integrate scanning into CI/CD pipelines
-
-## Workshop Exercise
-
-1. Scan the workshop Docker image for vulnerabilities
-2. Analyze base image security issues
-3. Review Dockerfile configuration problems
-4. Learn to interpret scanner results
-5. Implement security fixes and best practices
+- [🔜] Identify Dockerfile security best practices
 
 ## Security Checklist
 

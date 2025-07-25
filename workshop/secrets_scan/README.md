@@ -50,11 +50,14 @@ Secrets scan involves scanning code repositories, commit history, and configurat
 ### Other types of secrets or sensitive data
 There are other types of secrets or sensitive data that may not be covered by the tools we will use in this workshop, but that are still important to keep in mind:
 
-- **Webhooks** - Webhooks are used to trigger actions in other systems, and can be used to trigger malicious actions.
+#### **Webhooks**
+- Webhooks are used to trigger actions in other systems, and can be used to trigger malicious actions.
   - Like Slack webhooks, that can be used to impersonate a user and send messages to a channel.
-- **AWS Account IDs** - AWS account IDs (or other cloud provider identifiers) can be used to enumerate resources and help attackers to map the attack surface.
+#### **AWS Account IDs**
+- AWS account IDs (or other cloud provider identifiers) can be used to enumerate resources and help attackers to map the attack surface.
   - There's a lot of discussion about if this should be considered a secret or not. [According to AWS they are not](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-identifiers.html), but we think this article from Daniel Grzelak is a good explanation of why they are: [The Final Answer: AWS Account IDs Are Secrets](https://www.plerion.com/blog/the-final-answer-aws-account-ids-are-secrets)
-- **Internal Documents or PII** - PDFs, log files, customer data dumps, identity scans and even bank statements that slip into repos during troubleshooting or demo work.
+#### **Internal Documents or PII**
+- PDFs, log files, customer data dumps, identity scans and even bank statements that slip into repos during troubleshooting or demo work.
 
 ## Tools Used in This Module
 
