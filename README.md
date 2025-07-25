@@ -2,16 +2,6 @@
 
 Welcome to the "Perfect Pipeline" workshop! This hands-on workshop teaches you how to build a comprehensive security-focused CI/CD pipeline with multiple layers of security scanning and best practices.
 
-## 🎯 Workshop Objectives
-
-Learn to implement a complete secure software development lifecycle with:
-- Pipeline security scanning
-- Static and dynamic code analysis
-- Secrets Scan and management
-- Container security scanning
-- Infrastructure as Code (IaC) security
-- Runtime security testing
-
 ## 🏗️ Workshop Structure
 
 The workshop is organized into different modules, each focusing on a specific aspect of pipeline security:
@@ -20,15 +10,6 @@ The workshop is organized into different modules, each focusing on a specific as
 
 ```
 ├── .github/workflows/               # GitHub Actions workflows
-│   ├── pipeline-orchestrator.yml    # Main orchestrator
-│   ├── pipeline-scan.yml           # Pipeline security scan
-│   ├── code-analysis.yml           # SAST/SCA scanning
-│   ├── secrets-scan.yml            # Secrets scanning
-│   ├── build.yml                   # Application build & container scan
-│   ├── iac-scan.yml                # Infrastructure scanning
-│   ├── deploy-infrastructure.yml   # Infra deployment
-│   ├── deploy-application.yml      # App deployment
-│   └── runtime-infra-scan.yml      # Runtime infrastructure scan
 ├── code/                            # Sample vulnerable application
 ├── infra/                           # Terraform infrastructure
 └── workshop/                        # Workshop modules and documentation
@@ -37,7 +18,7 @@ The workshop is organized into different modules, each focusing on a specific as
 ## 📚 Workshop Modules
 
 ### 0. 🐦‍🔥 [Introduction](workshop/)
-Workshop introduction and overview.
+Workshop introduction.
 
 ### 1. 🔍 [Pipeline Security Scan](workshop/pipeline_scan/)
 Learn to scan CI/CD pipelines for security misconfigurations and vulnerabilities.
@@ -49,10 +30,10 @@ Implement SAST (Static Application Security Testing) and SCA (Software Compositi
 Detect and prevent exposure of credentials and sensitive information.
 
 ### 4. 🐳 [Container Security Scanning](workshop/container_scan/)
-Scan Docker images and containers for vulnerabilities and misconfigurations.
+Scan Docker images for vulnerabilities and misconfigurations.
 
 ### 5. 🏗️ [Infrastructure Security Scan](workshop/iac_scan/)
-Analyze Infrastructure as Code (Terraform) for security issues.
+Analyze Infrastructure as Code for security issues.
 
 ### 6. 🔍 [Runtime Infrastructure Scan](workshop/runtime_infra_scan/)
 Scan the "real" infrastructure for vulnerabilities.
@@ -60,10 +41,9 @@ Scan the "real" infrastructure for vulnerabilities.
 ## 🚀 Getting Started
 
 ### Prerequisites
-- GitHub account with Actions enabled
+- GitHub Account to fork the repository
 - Basic knowledge of CI/CD concepts
-- Understanding of Docker and containers
-- Familiarity with cloud infrastructure concepts
+- Familiarity with containers and cloud infrastructure concepts
 
 > [!TIP]
 > While this workshop uses GitHub Actions, most of the skills and best practices you learn can be applied to any CI/CD platform.
@@ -75,48 +55,32 @@ Scan the "real" infrastructure for vulnerabilities.
 4. **Learn to fix** the identified vulnerabilities
 5. **Implement security best practices**
 
-## 🎓 Learning Outcomes
+### Workshop Goal
+The idea of this workshop is to demonstrate how to build a "perfect" (secure and practical) CI/CD pipeline using open-source tools (OSS).
+
+**The goal is inspirational, not prescriptive.** We do not want you to copy these examples, but to understand the principles and identify the modular components you can adapt to implement in your own environment.
+
+### 🎓 Learning Outcomes
 
 By completing this workshop, you will:
 - Understand the importance of shift-left security
-- Know how to implement comprehensive security scanning
-- Learn to interpret and triage security findings
-- Understand security best practices for CI/CD
-- Be able to build secure, automated pipelines
+- Learn the key stages of a secure pipeline:
+  - Pipeline Security
+  - Static and Dynamic Code Analysis
+  - Secrets Detection
+  - Container Security
+  - Infrastructure as Code (IaC) Security
+  - Runtime Infrastructure Security
+- Know relevant OSS tools for each stage
+- Grasp the principles needed to start building or improving your own secure CI/CD process
+
+### Out of Scope (What this workshop is NOT)
+- Deep dives into specific development workflows (e.g., Gitflow vs. Trunk-based)
+- Focus on a specific application technology stack (language/framework agnostic where possible)
+- A definitive statement on the "best" tools (alternatives will be mentioned for key steps)
+
 
 ---
-
-## 🔧 Sample Application
-
-The workshop includes an intentionally vulnerable Node.js application with:
-- Hardcoded secrets and credentials
-- SQL injection vulnerabilities
-- Authentication bypasses
-- Insecure file uploads
-- Missing input validation
-- Information disclosure
-
-## 🏗️ Infrastructure
-
-The Terraform configuration includes common misconfigurations:
-- Overly permissive security groups
-- Unencrypted resources
-- Exposed sensitive outputs
-- Missing security controls
-- Hardcoded credentials
-
-
-## 🛠️ Tools Demonstrated
-
-#TODO: Update this section with the tools used in the workshop
-
-The workshop showcases various security tools:
-- **GitHub Security Features** (Dependabot, Secret Scanning)
-- **SAST Tools** (Semgrep, CodeQL, SonarQube)
-- **SCA Tools** (npm audit, Snyk, OWASP Dependency Check)
-- **Container Scanners** (Trivy, Grype, Docker Bench)
-- **IaC Scanners** (Checkov, TFSec, Terrascan)
-- **DAST Tools** (OWASP ZAP, Burp Suite)
 
 ## 🤝 Contributing
 
@@ -132,4 +96,4 @@ This workshop is provided under the MIT License for educational purposes.
 
 ---
 
-**Ready to build the perfect secure pipeline? Start with [Pipeline Security Scan](workshop/pipeline_scan/)! 🚀**
+**Ready to build the perfect secure pipeline? Start [here](workshop/)! 🚀**

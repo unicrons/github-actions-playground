@@ -32,23 +32,6 @@ Shift-left security is a security practice that aims to move security checks and
 </p>
 
 
-## Workshop Goals
-The idea of this workshop is to demonstrate how to build a "perfect" (secure and practical) CI/CD pipeline using open-source tools (OSS).
-
-The goal is inspirational, not prescriptive. We do not want you to copy these examples, but to understand the principles and identify the modular components you can adapt to implement in your own environment.
-
-### Learning Outcomes
-- Understand the key stages of a secure pipeline
-- Know relevant OSS tools for each stage
-- Grasp the principles needed to start building or improving your own secure CI/CD process.
-
-
-### Out of Scope (What this workshop is NOT)
-- Deep dives into specific development workflows (e.g., Gitflow vs. Trunk-based)
-- Focus on a specific application technology stack (language/framework agnostic where possible)
-- A definitive statement on the "best" tools (alternatives will be mentioned for key steps)
-
-
 ## Workshop Index
 We suggest you follow the workshop in the following order, but feel free to jump around and explore the different modules.
 
@@ -59,5 +42,11 @@ We suggest you follow the workshop in the following order, but feel free to jump
 5. [Infrastructure Security Scan](iac_scan/)
 6. [Runtime Infrastructure Scan](runtime_infra_scan/)
 
-
+## Workshop flow
+Fork this repository and follow for each module:
+1. Read the README.md file.
+2. For each tool in that module follow the instructions in the `workflow.yml` file.
+3. Push the changes and see the results.
+4. Try to fix the issues for that step until you get a green pipeline ✅.
+5. Try a different tool (if available) or go to the next module.
 

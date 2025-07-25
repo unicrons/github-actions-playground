@@ -28,13 +28,6 @@ By the end of this module, you will:
 - Know how to implement pipeline security best practices
 - Understand the importance of least privilege in automation
 
-## Workshop Exercise
-
-1. Review the workflow files for security issues
-2. Identify hardcoded secrets and excessive permissions
-3. Learn to use automated pipeline scanning tools
-4. Implement security fixes and best practices
-
 ## Security Checklist
 
 - [ ] No hardcoded secrets in workflow files
