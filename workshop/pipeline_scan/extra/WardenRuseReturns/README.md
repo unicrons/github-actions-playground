@@ -1,5 +1,8 @@
 # Warden Ruse Returns
 
+> [!WARNING]
+> The infrastructure for this challenge will be deployed only during live events.
+
 Based on the Warden Ruse challenge from the [Cloud Village CTF 2024](https://unicrons.cloud/en/2024/08/13/writeup-cloud-village-ctf-2024/#wardens-ruse-540).
 
 This time our Admin has been studying the Github Actions OIDC token and has added some new conditions to the policy to make it more secure.

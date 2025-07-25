@@ -55,17 +55,7 @@ In addition to scanning for infrastructure security issues, we must also ensure 
 By the end of this module, you will:
 - Understand IaC security scanning principles
 - Learn to identify common misconfigurations
-- Configure and run IaC security tools
-- Understand policy as code concepts
-- Integrate IaC scanning into CI/CD pipelines
 
-## Workshop Exercise
-
-1. Scan Terraform configurations for security issues
-2. Identify and analyze security misconfigurations
-3. Learn to write custom security policies
-4. Review compliance and best practice violations
-5. Implement fixes for identified issues
 
 ## Security Checklist
 

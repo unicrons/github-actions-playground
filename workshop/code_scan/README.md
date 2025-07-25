@@ -1,4 +1,4 @@
-# Code Security Analysis (SAST/SCA)
+# Code Security Analysis (SAST/SCA) [🚧 Under construction]
 
 This workshop module covers Static Application Security Testing (SAST) and Software Composition Analysis (SCA) to identify security vulnerabilities in application code and dependencies.
 
@@ -32,34 +32,15 @@ Malicious actors can exploit vulnerabilities in your code to gain unauthorized a
 
 ## Tools Used in This Module
 
-### SAST Tools: #TODO: Update this section
-- **Semgrep** - Static analysis with custom rules
-- **CodeQL** - GitHub's semantic code analysis
-- **SonarQube** - Code quality and security analysis
-- **ESLint Security Plugin** - JavaScript security linting
-
-### SCA Tools: #TODO: Update this section
-- **npm audit** - Node.js dependency scanner
-- **Snyk** - Vulnerability database scanning
-- **OWASP Dependency Check** - Dependency vulnerability scanner
-- **GitHub Dependabot** - Automated dependency updates
+- **[Dependency Check](https://github.com/dependency-check/DependencyCheck)** - OWASP Dependency Check
 
 ## Learning Objectives
 
 By the end of this module, you will:
 - Understand the difference between SAST and SCA
 - Learn to configure and run security scanners
-- Interpret scan results and prioritize fixes
 - Understand common vulnerability patterns
 - Learn to integrate security scanning into CI/CD
-
-## Workshop Exercise
-
-1. Run SAST tools on the vulnerable application code
-2. Analyze dependency vulnerabilities with SCA tools
-3. Review and triage security findings
-4. Learn to suppress false positives
-5. Implement fixes for critical vulnerabilities
 
 ## Security Checklist
 

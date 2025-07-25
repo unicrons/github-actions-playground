@@ -22,31 +22,42 @@ Secrets scan involves scanning code repositories, commit history, and configurat
 
 ### Common Types of Secrets
 
-- **Generic Credentials** - Hard-coded passwords, database connection strings, custom tokens, plaintext encryption keys
-    - 58% of all detected secrets [^1]
-- **Database Service Credentials** - MongoDB connection strings, MySQL/PostgreSQL credentials
-    - 19% of public-repo leaks are MongoDB alone [^2]
-- **Cloud Provider Keys** - AWS IAM access keys, Google Cloud keys, Azure SAS tokens
-    - AWS keys represent 8% of private-repo leaks [^2]
-- **Third-Party API Keys** - Google API, Stripe, Twilio, SendGrid, OpenWeatherMap tokens
-    - OpenWeatherMap tokens among top 10 leaked services [^3]
-- **Messaging/Bot Tokens** - Telegram Bot tokens, Slack/Discord webhooks
-    - Telegram Bot tokens account for 6.3% of public leaks [^1]
-- **Gen-AI Service Keys** - OpenAI, HuggingFace, Gemini, Pinecone API keys
-    - OpenAI key leaks grew 1,212× year-over-year [^4]
-- **Private Cryptographic Material** - RSA/SSH private keys, JWT signing keys, TLS certificates
-    - RSA private keys consistently rank in top-10 leak types
-- **OAuth/Personal Access Tokens** - GitHub PATs, GitLab tokens
-    - Detected hundreds of times daily, classified as "highly critical" in 41% of cases [^4]
+#### **Generic Credentials**
+- Hard-coded passwords, database connection strings, custom tokens, plaintext encryption keys
+- 58% of all detected secrets [^1]
+#### **Database Service Credentials**
+- MongoDB connection strings, MySQL/PostgreSQL credentials
+- 19% of public-repo leaks are MongoDB alone [^2]
+#### **Cloud Provider Keys**
+- AWS IAM access keys, Google Cloud keys, Azure SAS tokens
+- AWS keys represent 8% of private-repo leaks [^2]
+#### **Third-Party API Keys**
+- Google API, Stripe, Twilio, SendGrid, OpenWeatherMap tokens
+- OpenWeatherMap tokens among top 10 leaked services [^3]
+#### **Messaging/Bot Tokens**
+- Telegram Bot tokens, Slack/Discord webhooks
+- Telegram Bot tokens account for 6.3% of public leaks [^1]
+#### **Gen-AI Service Keys**
+- OpenAI, HuggingFace, Gemini, Pinecone API keys
+- OpenAI key leaks grew 1,212× year-over-year [^4]
+#### **Private Cryptographic Material**
+- RSA/SSH private keys, JWT signing keys, TLS certificates
+- RSA private keys consistently rank in top-10 leak types
+#### **OAuth/Personal Access Tokens**
+- GitHub PATs, GitLab tokens
+- Detected hundreds of times daily, classified as "highly critical" in 41% of cases [^4]
 
 ### Other types of secrets or sensitive data
 There are other types of secrets or sensitive data that may not be covered by the tools we will use in this workshop, but that are still important to keep in mind:
 
-- **Webhooks** - Webhooks are used to trigger actions in other systems, and can be used to trigger malicious actions.
+#### **Webhooks**
+- Webhooks are used to trigger actions in other systems, and can be used to trigger malicious actions.
   - Like Slack webhooks, that can be used to impersonate a user and send messages to a channel.
-- **AWS Account IDs** - AWS account IDs (or other cloud provider identifiers) can be used to enumerate resources and help attackers to map the attack surface.
+#### **AWS Account IDs**
+- AWS account IDs (or other cloud provider identifiers) can be used to enumerate resources and help attackers to map the attack surface.
   - There's a lot of discussion about if this should be considered a secret or not. [According to AWS they are not](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-identifiers.html), but we think this article from Daniel Grzelak is a good explanation of why they are: [The Final Answer: AWS Account IDs Are Secrets](https://www.plerion.com/blog/the-final-answer-aws-account-ids-are-secrets)
-- **Internal Documents or PII** - PDFs, log files, customer data dumps, identity scans and even bank statements that slip into repos during troubleshooting or demo work.
+#### **Internal Documents or PII**
+- PDFs, log files, customer data dumps, identity scans and even bank statements that slip into repos during troubleshooting or demo work.
 
 ## Tools Used in This Module
 
@@ -58,16 +69,7 @@ By the end of this module, you will:
 - Understand different types of secrets and their risks
 - Learn to use automated secrets detection tools
 - Know how to scan git history for leaked credentials
-- Understand secrets management best practices
 - Learn to prevent future secret exposures
-
-## Workshop Exercise
-
-1. Scan the repository for exposed secrets
-2. Review git history for leaked credentials
-3. Identify different types of secrets in code
-4. Learn to configure secrets detection tools
-5. Implement prevention strategies
 
 ## Security Checklist
 
