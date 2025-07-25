@@ -125,7 +125,7 @@ By the end of this module, you will:
 
 ## References
 - [Infrastructure as Code (IaC) Security: 10 Best Practices](https://spacelift.io/blog/infrastructure-as-code-iac-security)
-- [The Hidden Risk in Your Cloud Stack: How Overlooked AWS Resources Become Entry Points for Hackers](https://cloudsecurityalliance.org/blog/2025/05/22/the-hidden-risk-in-your-cloud-stack-how-overlooked-aws-resources-become-entry-points-for-hackers)
+- [The Hidden Risk in Your Cloud Stack - CSA Blog](https://checkred.com/resources/blog/the-hidden-risk-in-your-cloud-stack-how-overlooked-aws-resources-become-entry-points-for-hackers/) <!-- trufflehog:ignore -->
 - [Terraform Plan RCE](https://alex.kaskaso.li/post/terraform-plan-rce): A terraform plan is not as passive as you may think. If you run production plans on PRs you could be opening a path to bypassing branch protections and any expected process you have for production access.
 
 ### Other Tools
