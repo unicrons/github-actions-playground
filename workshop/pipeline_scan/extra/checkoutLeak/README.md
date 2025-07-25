@@ -83,6 +83,22 @@ with:
   persist-credentials: false
 ```
 
+Now the `.git/config` will look like this:
+
+```bash
+$ cat .git/config
+
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/unicrons/github-actions-playground
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[gc]
+	auto = 0
+```
 
 
 
