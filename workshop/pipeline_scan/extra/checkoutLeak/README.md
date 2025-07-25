@@ -75,6 +75,14 @@ $ curl -H "Authorization: basic $(echo $GH_TOKEN | base64)" \
 > ![NOTE]
 > I did not find a way to use the Github Actions Token to enumerate informations without knowing previously the name of the repository or the organization.
 
+As mentioned in the article, you can avoid this using the `persist-credentials` option:
+
+```yaml
+uses: actions/checkout@v4
+with:
+  persist-credentials: false
+```
+
 
 
 
