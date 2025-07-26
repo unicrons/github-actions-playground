@@ -85,7 +85,7 @@ By the end of this module, you will:
 
 ## References
 - [The State of Secrets Sprawl 2025](https://www.gitguardian.com/state-of-secrets-sprawl-report-2025): "In 2024 GitGuardian scanned 69.6M public repositories of which at least 4.61% contained a secret."
-- [How did Openai detect that my API key was pushed to Github?](https://www.reddit.com/r/OpenAI/comments/zotyq4/how_did_openai_detect_that_my_api_key_was_pushed/): Reddit user surprised because OpenAI contacted him seconds after pushing an API key to Github.
+- [How did Openai detect that my API key was pushed to GitHub?](https://www.reddit.com/r/OpenAI/comments/zotyq4/how_did_openai_detect_that_my_api_key_was_pushed/): Reddit user surprised because OpenAI contacted him seconds after pushing an API key to GitHub.
 
 [^1]: [23 million secrets spilled on GitHub, developers naively assume no one will know](https://cybernews.com/security/developers-hardcoding-secrets-github-risk/)
 [^2]: [Analysis of GitHub Repositories Surfaces Nearly 23M Secrets](https://devops.com/analysis-of-github-repositories-surfaces-nearly-23m-secrets/)

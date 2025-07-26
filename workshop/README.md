@@ -2,7 +2,7 @@
 
 This workshop is designed to help you understand the importance of shift-left security and how to implement comprehensive security scanning in your pipeline.
 
-All of this without forgetting the human factor, as the final objective is not blind security but enabling your users (or yourself) to build secure software.
+All of this without forgetting the human factor, as the final objective is not blind security but enabling your users (or yourself) to build secure software effectively.
 
 Let's start with some important concepts:
 
@@ -43,10 +43,9 @@ We suggest you follow the workshop in the following order, but feel free to jump
 6. [Runtime Infrastructure Scan](runtime_infra_scan/)
 
 ## Workshop flow
-Fork this repository and follow for each module:
+To begin, fork this repository. Then, for each module:
 1. Read the README.md file.
-2. For each tool in that module follow the instructions in the `workflow.yml` file.
-3. Push the changes and see the results.
-4. Try to fix the issues for that step until you get a green pipeline ✅.
-5. Try a different tool (if available) or go to the next module.
-
+2. For each tool within that module, follow the instructions in the `workflow.yml` file.
+3. Push your changes and observe the results.
+4. Work to fix any issues for that step until you achieve a green pipeline ✅.
+5. Then, try a different tool (if available) or proceed to the next module.

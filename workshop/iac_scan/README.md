@@ -11,7 +11,7 @@ This step has its limitations, as some issues can only be detected at runtime, b
 
 ## Common IaC Security Issues
 
-A lot of this issues are shared with the [Infrastructure Runtime Security](../runtime_infra_scan/) module.
+Many of these issues are shared with the [Infrastructure Runtime Security](../runtime_infra_scan/) module.
 
 ### Access Control
 - **Overly Permissive IAM Policies** – wildcard privileges and never-used rights that violate least-privilege.
