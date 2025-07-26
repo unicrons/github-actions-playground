@@ -19,7 +19,7 @@ Continuous runtime scanning helps ensure your infrastructure remains secure afte
 
 ## Tools Used in This Module
 
-- **Prowler** – Perform security best practices assessments for multiple cloud providers (AWS, Azure, GCP, M365, Github and more).
+- **Prowler** – Perform security best practices assessments for multiple cloud providers (AWS, Azure, GCP, M365, GitHub and more).
   - It can be used also for continuous monitoring and remediation, but we will focus on the assessment part.
 
 ## Learning Objectives

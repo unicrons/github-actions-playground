@@ -1,10 +1,10 @@
-# `actions/checkout` can leak Github Credentials
+# `actions/checkout` Can Leak GitHub Credentials
 
 > Based on the article, [actions/checkout can leak GitHub credentials](https://yossarian.net/til/post/actions-checkout-can-leak-github-credentials/), from [William Woodruff](https://github.com/woodruffw)
 
-This extra ball just wants to demonstrate what William perfectly explained in his article: that by default, `actions/checkout` can silently leak Github credentials to the runner.
+This exercise demonstrates what William explained in his article: that by default, `actions/checkout` can silently leak GitHub credentials to the workflow runner.
 
-If you copy the following block of code into the `pipeline-scan.yml`, replacing the `jobs` section, you will see that the `actions/checkout` action will leak the Github credentials to the runner.
+If you copy the following block of code into the `pipeline-scan.yml`, replacing the `jobs` section, you will see that the `actions/checkout` action will leak the GitHub credentials to the runner.
 
 ```yaml
 jobs:
@@ -55,7 +55,7 @@ $ cat .git/config
 [gc]
 	auto = 0
 [http "https://github.com/"]
-	extraheader = AUTHORIZATION: basic <the Github token as base64>
+	extraheader = AUTHORIZATION: basic <the GitHub token as base64>
 ```
 
 And we can test it works by running the following command:
@@ -73,7 +73,7 @@ $ curl -H "Authorization: basic $(echo $GH_TOKEN | base64)" \
 ```
 
 > ![NOTE]
-> I did not find a way to use the Github Actions Token to enumerate informations without knowing previously the name of the repository or the organization.
+> I did not find a way to use the GitHub Actions Token to enumerate informations without knowing previously the name of the repository or the organization.
 
 As mentioned in the article, you can avoid this using the `persist-credentials` option:
 
@@ -105,4 +105,4 @@ $ cat .git/config
 
 ## References
 - [Use GITHUB_TOKEN in workflows](https://docs.github.com/en/actions/tutorials/use-github_token-in-workflows): Learn how to use the GITHUB_TOKEN to authenticate on behalf of GitHub Actions.
-- [actions/checkout can leak GitHub credentials](https://yossarian.net/til/post/actions-checkout-can-leak-github-credentials/) to enumerate informations knowing previously the name of the repository. or hthe organization..
+- [actions/checkout can leak GitHub credentials](https://yossarian.net/til/post/actions-checkout-can-leak-github-credentials/)

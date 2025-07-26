@@ -3,7 +3,7 @@
 This workshop module covers container security scanning to identify vulnerabilities in container images and configurations.
 
 ## Why is Container Security Important?
-Containers are now one of the most common ways to deploy applications. They are also a common target for attackers, as they can be used to gain access to the underlying infrastructure, access secrets (including cloud credentials), or run arbitrary code.
+Containers are now one of the most common ways to deploy applications. They are also attractive targets for attackers who can use them to access underlying infrastructure, steal secrets (including cloud credentials), or execute arbitrary code.
 
 Container security scanning analyzes images and container configurations to identify security vulnerabilities, misconfigurations, and compliance issues before releasing them.
 
