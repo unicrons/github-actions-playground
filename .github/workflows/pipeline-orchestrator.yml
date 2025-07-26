@@ -54,6 +54,22 @@ jobs:
       environment: staging
       app-url: https://workshop-app-staging.example.com
 
+  dast:
+    needs: deploy-application
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/dast.yml
+    with:
+      environment: staging
+      app-url: https://workshop-app-staging.example.com
+
+  integration-test:
+    needs: deploy-application
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/integration-test.yml
+    with:
+      environment: staging
+      app-url: https://workshop-app-staging.example.com
+
   pipeline-summary:
     name: Pipeline Summary
     runs-on: ubuntu-latest
