@@ -32,6 +32,7 @@ jobs:
           scan-ref: infra/
           hide-progress: true
           format: 'sarif'
+          limit-severities-for-sarif: true
           output: 'trivy-results.sarif'
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
