@@ -1,11 +1,16 @@
-name: Infrastructure Security Scan
-
-on:
-  workflow_call:
-    outputs:
-      scan-result:
-        description: "IaC scan result"
-        value: ${{ jobs.iac-scan.outputs.result }}
+# =============================================================================
+# TRIVY IAC SCAN JOB
+# =============================================================================
+#
+# Trivy is a vulnerability scanner for container images and filesystems
+# Repository: https://github.com/aquasecurity/trivy
+#
+# TO USE THIS JOB:
+# 1. Copy this entire job definition into .github/workflows/iac-scan.yml
+# 2. Replace the current jobs: definition with this one
+# 3. The job will automatically scan all files in infra/
+# 4. The scan will fail if any security issues are found
+# =============================================================================
 
 jobs:
   iac-scan:
