@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   ai-security-review:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/ai-review')
+    if: github.event.issue.pull_request && (contains(github.event.comment.body, '/ai-review') || contains(github.event.comment.body, '/ai-scan') || contains(github.event.comment.body, '/security-scan'))
     runs-on: ubuntu-latest
     name: AI-powered Security Review
     
@@ -33,6 +33,7 @@ jobs:
           fetch-depth: 0
 
       - name: AI Security Review with Gemini
+        id: gemini-review
         uses: google-gemini/gemini-cli-action@main
         with:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -41,7 +42,7 @@ jobs:
             Please review this pull request focusing on:
             
             1. Security vulnerabilities in the code changes
-            2. CI/CD pipeline security best practices
+            2. CI/CD pipeline security best practices  
             3. Infrastructure as Code (IaC) security issues
             4. Container and Docker security concerns
             5. Secrets management and exposure risks
@@ -56,9 +57,54 @@ jobs:
             - Best practices suggestions
             
             Focus on actionable feedback that helps improve the security posture of this CI/CD pipeline.
+            Please format your response in clear sections and use markdown formatting for better readability.
             
-            Analyze the changes in this pull request using git diff to examine the actual changes made.
-            
+            Review the current files in this repository, especially looking for:
+            - Hardcoded secrets or credentials
+            - Insecure coding practices
+            - Missing security headers or configurations
+            - Vulnerable dependencies
+            - CI/CD pipeline security issues
+
+      - name: Extract Gemini Analysis
+        id: extract-analysis
+        run: |
+          echo "Extracting Gemini analysis from previous step output..."
+          
+          # Get logs specifically from the gemini-review step
+          GEMINI_LOG=$(gh run view ${{ github.run_id }} --log --job="ai-security-review" --repo ${{ github.repository }} 2>/dev/null || echo "Could not fetch job logs")
+          
+          # Try to extract the Gemini output directly from the step logs
+          FILTERED_OUTPUT=$(echo "$GEMINI_LOG" | sed -n '/AI Security Review with Gemini/,/Extract Gemini Analysis/p' | grep -v "Extract Gemini Analysis")
+          
+          if [ -z "$FILTERED_OUTPUT" ]; then
+            echo "Could not extract from job logs. Trying step-specific patterns..."
+            # Try to find common Gemini output patterns
+            FILTERED_OUTPUT=$(echo "$GEMINI_LOG" | sed -n '/### Security Review Details/,$p' | head -n -10)
+          fi
+          
+          if [ -z "$FILTERED_OUTPUT" ]; then
+            echo "Trying alternative patterns..."
+            # Try other common patterns that Gemini might use
+            FILTERED_OUTPUT=$(echo "$GEMINI_LOG" | sed -n '/## Security Analysis/,$p' | head -n -10)
+          fi
+          
+          if [ -z "$FILTERED_OUTPUT" ]; then
+            echo "Trying to capture any markdown-formatted output..."
+            # Look for any markdown headers in the output
+            FILTERED_OUTPUT=$(echo "$GEMINI_LOG" | grep -A 50 "^#" | head -n 50)
+          fi
+          
+          if [ -z "$FILTERED_OUTPUT" ]; then
+            FILTERED_OUTPUT="❌ Could not extract AI analysis from job logs. Please check the workflow run for detailed results."
+          fi
+          
+          # Save the filtered result
+          echo "GEMINI_ANALYSIS<<EOF" >> $GITHUB_OUTPUT
+          echo "$FILTERED_OUTPUT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          echo "Analysis extracted and saved to output"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,16 +112,22 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const comment = `## 🤖 AI Security Review Results
+            // Get the extracted Gemini analysis
+            const geminiOutput = process.env.GEMINI_ANALYSIS || "❌ Analysis could not be completed. Check workflow logs for details.";
             
-            The AI security scan has been completed! 🚀
+            const comment = `## 🤖 AI Security Review Results
             
             **Triggered by:** @${{ github.event.comment.user.login }}
             **Command:** \`${{ github.event.comment.body }}\`
+            **Status:** ✅ Analysis Complete
             
-            > 💡 **Note:** Detailed analysis is currently logged in the workflow. Soon we'll display the full review here!
+            ---
             
-            Check the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for complete details.
+            ${geminiOutput}
+            
+            ---
+            
+            **📊 Details:** [Workflow Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | *Commands: \`/ai-review\`, \`/ai-scan\`, \`/security-scan\`*
             `;
             
             await github.rest.issues.createComment({
@@ -84,3 +136,5 @@ jobs:
               issue_number: context.issue.number,
               body: comment
             });
+        env:
+          GEMINI_ANALYSIS: ${{ steps.extract-analysis.outputs.GEMINI_ANALYSIS }}
