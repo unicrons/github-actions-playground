@@ -49,6 +49,9 @@ In addition to scanning for infrastructure security issues, we must also ensure 
 ## Tools Used in This Module
 
 - **Checkov** - Static analysis for IaC
+- **Trivy** - Misconfiguration scanner for IaC
+  - It also supports scanning filesystems, containers or repos, but we will focus on IaC for this module.
+
 
 ## Learning Objectives
 

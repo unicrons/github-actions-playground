@@ -25,7 +25,7 @@ Container security scanning analyzes images and container configurations to iden
 ## Tools Used in This Module
 
 - **Trivy** - Vulnerability, misconfiguration and secret scanner for containers.
-  - It also supports scanning filesystems or repos, but we will focus on containers.
+  - It also supports scanning filesystems, IaC or repos, but we will focus on containers for this module.
 
 ## Learning Objectives
 
