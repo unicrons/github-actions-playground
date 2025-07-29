@@ -41,6 +41,7 @@ We suggest you follow the workshop in the following order, but feel free to jump
 4. [Container Security Scanning](container_scan/)
 5. [Infrastructure as Code Security Scan](iac_scan/)
 6. [Runtime Infrastructure Scan](runtime_infra_scan/)
+7. [AI Security Analysis](ai_scan/)
 
 ## Workshop flow
 To begin, fork this repository. Then, for each module:
