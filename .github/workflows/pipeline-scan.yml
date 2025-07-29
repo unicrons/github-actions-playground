@@ -38,37 +38,34 @@ jobs:
               regions = ["${{ vars.AWS_REGION }}"]
             }
 
-      - name: Install AWS compliance benchmarks
-        run: |
-          # Install the AWS plugin to connect to AWS services
-          steampipe plugin install aws
-          # Install the AWS compliance mod which contains security benchmarks
-          steampipe mod install steampipe-mod-aws-compliance
+      - name: Install Powerpipe
+        uses: turbot/powerpipe-action-setup@458766075e63ffeb1992e6109759526f68611708 # v1
 
-      - name: Run Steampipe AWS security compliance checks
-        id: steampipe
+      - name: Start steampipe service
         run: |
-          # Run AWS CIS v1.4.0 Level 2 benchmark checks
-          # CIS (Center for Internet Security) provides industry-accepted security standards
-          steampipe check benchmark.cis_v140_2 \
-            --progress=false \
-            --export=steampipe-results.html \
-            --output=brief
-        continue-on-error: true
+          steampipe service start
 
-      - name: Upload Steampipe HTML Report
+      - name: Run specific AWS Compliance benchmarks
+        uses: turbot/powerpipe-action-check@0b905d17e8b6970bc39bcd347c053992bd8770de # v1.0.1
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-aws-compliance
+          benchmarks: |
+            cis_v150
+          artifact-exports: html
+
+      - name: Upload Powerpipe HTML Report
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
-          name: steampipe-html-report
-          path: steampipe-results.html
+          name: powerpipe-html-report
+          path: aws_compliance.benchmark.cis_v150.*.html
           retention-days: 3
 
       - name: Set scan result
         id: scan-result
         if: always()
         run: |
-          if [ "${{ steps.steampipe.outcome }}" == "success" ]; then
+          if [ "${{ steps.powerpipe.outcome }}" == "success" ]; then
             echo "result=success" >> "$GITHUB_OUTPUT"
             echo "✅ Runtime infrastructure scan passed - no critical issues found"
           else
