@@ -1,11 +1,25 @@
-name: Pipeline Security Scan
-
-on:
-  workflow_call:
-    outputs:
-      scan-result:
-        description: "Pipeline scan result"
-        value: ${{ jobs.pipeline-scan.outputs.result }}
+# =============================================================================
+# STEAMPIPE RUNTIME INFRASTRUCTURE SCAN JOB
+# =============================================================================
+#
+# Steampipe is a SQL-based infrastructure analysis tool for cloud platforms
+# Repository: https://github.com/turbot/steampipe
+#
+# PREREQUISITES:
+# - An AWS IAM role with the following policies:
+#   - `arn:aws:iam::aws:policy/SecurityAudit`
+#   - `arn:aws:iam::aws:policy/job-function/ViewOnlyAccess`
+#     - More info about it in https://steampipe.io/docs/aws/setup
+# - Configure role arn as secret in the repository, called `AWS_IAM_ROLE_ARN`
+# - Configure AWS Region as variable in the repository, called `AWS_REGION`
+# - Configure AWS IAM Role Session Duration as variable in the repository (default: 3600 seconds), called `AWS_IAM_ROLE_SESSION_DURATION`
+#
+# TO USE THIS JOB:
+# 1. Copy this entire job definition into .github/workflows/runtime-infra-scan.yml
+# 2. Replace the current jobs: definition with this one
+# 3. The job will automatically scan your AWS infrastructure using Steampipe
+# 4. The scan will fail if any critical security issues are found
+# =============================================================================
 
 jobs:
   runtime-infra-scan:
