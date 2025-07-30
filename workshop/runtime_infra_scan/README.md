@@ -21,6 +21,7 @@ Continuous runtime scanning helps ensure your infrastructure remains secure afte
 
 - **Prowler** – Perform security best practices assessments for multiple cloud providers (AWS, Azure, GCP, M365, GitHub and more).
   - It can be used also for continuous monitoring and remediation, but we will focus on the assessment part.
+- **Steampipe** – SQL-based infrastructure analysis and compliance checking for cloud platforms.
 
 ## Learning Objectives
 
@@ -41,5 +42,5 @@ By the end of this module, you will:
 - [ ] Regular runtime scans scheduled and reviewed
 
 ## References
-- [Prowler’s State of Cloud Security Report 2025](https://prowler.com/blog/cloud-security-report-2025/)
+- [Prowler's State of Cloud Security Report 2025](https://prowler.com/blog/cloud-security-report-2025/)
 - [Top cloud misconfigurations: A CSPM perspective](https://sysdig.com/blog/top-cloud-misconfigurations/)
