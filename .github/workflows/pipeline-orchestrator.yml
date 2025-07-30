@@ -4,16 +4,13 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
-  contents: read
-  id-token: write
-  issues: write
-  pull-requests: write
-
 jobs:
   pipeline-scan:
     uses: ./.github/workflows/pipeline-scan.yml
-    secrets: inherit
+    permissions:
+      security-events: write
+      contents: read # only needed for private repos
+      actions: read # only needed for private repos
 
   code-scan:
     needs: pipeline-scan
