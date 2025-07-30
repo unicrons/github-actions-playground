@@ -21,11 +21,14 @@ jobs:
 
       - name: Install Prowler
         run: |
+            # TODO: Installing from commit until 5.10 is released
             pipx install git+https://github.com/prowler-cloud/prowler.git@8dc4bd0be8e06464f6600ee68e368cadde7c7f22
             prowler -v
 
       - name: Run Prowler
         id: prowler
+        env:
+          GITHUB_OAUTH_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
             prowler github --repository {{ github.repository }} --output-formats html
         continue-on-error: true
