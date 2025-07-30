@@ -21,7 +21,7 @@ jobs:
 
       - name: Install Prowler
         run: |
-            pipx install prowler
+            pipx install git+https://github.com/prowler-cloud/prowler.git@8dc4bd0be8e06464f6600ee68e368cadde7c7f22
             prowler -v
 
       - name: Run Prowler
