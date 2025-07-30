@@ -28,7 +28,7 @@ jobs:
       - name: Run Prowler
         id: prowler
         env:
-          GITHUB_OAUTH_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
             prowler github --repository {{ github.repository }} --output-formats html
         continue-on-error: true
