@@ -27,10 +27,11 @@ jobs:
 
       - name: Run Prowler
         id: prowler
-        # env:
-        #   GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PAT }}
+        env:
+          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-            prowler github --repository ${{ github.repository }} --personal-access-token ${{ secrets.GH_PAT }} --output-formats html
+            echo $GITHUB_PERSONAL_ACCESS_TOKEN | cut -c 1-15
+            prowler github --repository ${{ github.repository }} --output-formats html
         continue-on-error: true
 
       - name: Message
