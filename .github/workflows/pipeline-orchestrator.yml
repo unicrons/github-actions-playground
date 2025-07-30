@@ -66,4 +66,3 @@ jobs:
     with:
       environment: staging
       app-url: https://workshop-app-staging.example.com
-      
