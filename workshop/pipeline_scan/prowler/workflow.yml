@@ -6,24 +6,12 @@
 # Repository: https://github.com/prowler-cloud/prowler
 #
 # PREREQUISITES:
-# - A GitHub personal access token with access to the repository
-#     with the following permissions:
-#     - Read access to:
-#       - Dependabot alerts
-#       - Administration
-#       - Code
-#       - Commit statuses
-#       - Merge queues
-#       - Metadata
-#       - Pages
-#       - Pull requests
-#       - Repository advisories
-#       - Secret scanning alert dismissal requests
-#       - Secret scanning alerts
-#       - Secret scanning push protection bypass requests
-#       - Security events
-
-# - The token must be stored as a secret in the repository, called `GH_PAT`
+# - Follow the instructions to create a Github App from:
+#     https://docs.prowler.com/projects/prowler-open-source/en/latest/tutorials/github/getting-started-github/#3-github-app-credentials
+#
+# - Add the Github App credentials as secrets in the repository, called:
+#     - `GH_APP_ID`
+#     - `GH_APP_PRIVATE_KEY`
 #
 # TO USE THIS JOB:
 # 1. Copy this entire job definition into .github/workflows/pipeline-scan.yml
@@ -56,7 +44,8 @@ jobs:
       - name: Run Prowler
         id: prowler
         env:
-          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_APP_ID: ${{ secrets.GH_APP_ID }}
+          GITHUB_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
         run: |
             prowler github --repository ${{ github.repository }} --output-formats html
         continue-on-error: true
