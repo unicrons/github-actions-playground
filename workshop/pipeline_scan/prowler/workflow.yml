@@ -5,7 +5,25 @@
 # Prowler is a security scanner for Cloud Infrastructure
 # Repository: https://github.com/prowler-cloud/prowler
 #
-# PREREQUISITES: #TODO
+# PREREQUISITES:
+# - A GitHub personal access token with access to the repository
+#     with the following permissions:
+#     - Read access to:
+#       - Dependabot alerts
+#       - Administration
+#       - Code
+#       - Commit statuses
+#       - Merge queues
+#       - Metadata
+#       - Pages
+#       - Pull requests
+#       - Repository advisories
+#       - Secret scanning alert dismissal requests
+#       - Secret scanning alerts
+#       - Secret scanning push protection bypass requests
+#       - Security events
+
+# - The token must be stored as a secret in the repository, called `GH_PAT`
 #
 # TO USE THIS JOB:
 # 1. Copy this entire job definition into .github/workflows/pipeline-scan.yml
@@ -31,13 +49,16 @@ jobs:
 
       - name: Install Prowler
         run: |
-            pipx install prowler
+            # TODO: Installing from commit until 5.10 is released
+            pipx install git+https://github.com/prowler-cloud/prowler.git@8dc4bd0be8e06464f6600ee68e368cadde7c7f22
             prowler -v
 
       - name: Run Prowler
         id: prowler
+        env:
+          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-            prowler github --repository {{ github.repository }} --output-formats html
+            prowler github --repository ${{ github.repository }} --output-formats html
         continue-on-error: true
 
       - name: Message
