@@ -51,8 +51,7 @@ jobs:
       - name: Run Prowler
         id: prowler
         run: |
-            # Limited to IAM and S3 to speed up the example
-            prowler aws --service iam s3 --output-formats html
+            prowler aws --service iam s3 --output-formats html -z
         continue-on-error: true
 
       - name: Message
