@@ -38,7 +38,8 @@ Analyze Infrastructure as Code for security issues.
 ### 6. 🔍 [Runtime Infrastructure Scan](workshop/runtime_infra_scan/)
 Scan the "real" infrastructure for vulnerabilities.
 
-### 7. 🤖 [AI Security Analysis](workshop/ai_scan/)
+### Bonus Tracks
+#### 🤖 [AI Security Analysis](workshop/ai_scan/)
 Leverage artificial intelligence for comprehensive security reviews and intelligent vulnerability detection.
 
 
