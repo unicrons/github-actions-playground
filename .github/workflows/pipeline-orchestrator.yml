@@ -3,6 +3,8 @@ name: Pipeline Orchestrator
 on:
   pull_request:
     branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   pipeline-scan:
@@ -66,4 +68,4 @@ jobs:
     with:
       environment: staging
       app-url: https://workshop-app-staging.example.com
-      
+
