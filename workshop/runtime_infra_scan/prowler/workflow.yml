@@ -10,9 +10,9 @@
 #   - `arn:aws:iam::aws:policy/SecurityAudit`
 #   - `arn:aws:iam::aws:policy/job-function/ViewOnlyAccess`
 #     - More info about it in https://docs.prowler.com/projects/prowler-open-source/en/latest/tutorials/aws/authentication/
-# - Configure role arn as secret in the repository, called `AWS_IAM_ROLE_ARN`
-# - Configure AWS Region as variable in the repository, called `AWS_REGION`
-# - Configure AWS IAM Role Session Duration as variable in the repository (default: 3600 seconds), called `AWS_IAM_ROLE_SESSION_DURATION`
+# - Configure role arn as Repository Secret, called `AWS_IAM_ROLE_ARN`
+# - Configure AWS Region as Repository Variable, called `AWS_REGION`
+# - Configure AWS IAM Role Session Duration as Repository Variable (default: 3600 seconds), called `AWS_IAM_ROLE_SESSION_DURATION`
 #
 # TO USE THIS JOB:
 # 1. Copy this entire job definition into .github/workflows/runtime-infra-scan.yml
@@ -51,6 +51,7 @@ jobs:
       - name: Run Prowler
         id: prowler
         run: |
+            # Limited to IAM and S3 to speed up the example
             prowler aws --service iam s3 --output-formats html
         continue-on-error: true
 
