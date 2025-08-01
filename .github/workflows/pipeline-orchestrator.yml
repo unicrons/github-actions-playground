@@ -35,35 +35,30 @@ jobs:
 
   deploy-infrastructure:
     needs: iac-scan
-    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy-infrastructure.yml
 
   deploy-application:
     needs: [build-and-container-scan, deploy-infrastructure]
-    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy-application.yml
 
   runtime-infra-scan:
     needs: deploy-application
-    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/runtime-infra-scan.yml
     with:
-      environment: staging
-      app-url: https://workshop-app-staging.example.com
+      environment: ${{ github.ref_name }}
+      app-url: https://workshop-app-${{ github.ref_name }}.example.com
 
   dast:
     needs: deploy-application
-    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/dast.yml
     with:
-      environment: staging
-      app-url: https://workshop-app-staging.example.com
+      environment: ${{ github.ref_name }}
+      app-url: https://workshop-app-${{ github.ref_name }}.example.com
 
   integration-test:
     needs: deploy-application
-    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/integration-test.yml
     with:
-      environment: staging
-      app-url: https://workshop-app-staging.example.com
-      
+      environment: ${{ github.ref_name }}
+      app-url: https://workshop-app-${{ github.ref_name }}.example.com
+

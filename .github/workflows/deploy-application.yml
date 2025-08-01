@@ -18,8 +18,8 @@ jobs:
       - name: Deploy application
         id: deploy
         run: |
-          echo "🚀 Deploying to production environment..."
+          echo "🚀 Deploying to ${{ github.ref_name }} environment..."
           echo "📦 Image: workshop-app:${{ github.sha }}"
-          echo "🌐 URL: https://workshop-app-production.example.com"
+          echo "🌐 URL: https://workshop-app-${{ github.ref_name }}.example.com"
           echo "result=deployed" >> "$GITHUB_OUTPUT"
           echo "✅ Deployment complete!"
