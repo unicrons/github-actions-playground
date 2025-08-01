@@ -1,11 +1,27 @@
-name: Pipeline Security Scan
-
-on:
-  workflow_call:
-    outputs:
-      scan-result:
-        description: "Pipeline scan result"
-        value: ${{ jobs.repository-scan.outputs.result }}
+# =============================================================================
+# PROWLER REPOSITORY SCAN JOB
+# =============================================================================
+#
+# Prowler is a security scanner for Cloud Infrastructure
+# Repository: https://github.com/prowler-cloud/prowler
+#
+# PREREQUISITES:
+# - Follow the instructions to create a Github App from:
+#     https://docs.prowler.com/projects/prowler-open-source/en/latest/tutorials/github/getting-started-github/#3-github-app-credentials
+#
+# - Add the Github App credentials as secrets in the repository, called:
+#     - `GH_APP_ID`
+#     - `GH_APP_PRIVATE_KEY`
+#
+# TO USE THIS JOB:
+# 1. Copy this entire job definition into .github/workflows/pipeline-scan.yml
+# 2. Replace the current jobs: definition with this one
+# 3. The job will automatically scan the current repository settings
+# 4. The scan will fail if any security issues are found in the repository
+#
+# Note: This job is complementary to the other pipeline scan jobs, as focuses
+#       on the repository settings and not on the GitHub Actions workflows.
+# =============================================================================
 
 jobs:
   repository-scan:
@@ -29,7 +45,7 @@ jobs:
         id: prowler
         env:
           GITHUB_APP_ID: ${{ secrets.GH_APP_ID }}
-          GITHUB_APP_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          GITHUB_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
         run: |
             prowler github --repository ${{ github.repository }} --output-formats html
         continue-on-error: true
