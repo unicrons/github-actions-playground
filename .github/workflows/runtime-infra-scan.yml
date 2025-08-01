@@ -11,6 +11,10 @@ on:
         description: "Application URL to test"
         required: true
         type: string
+    secrets:
+      AWS_IAM_ROLE_ARN:
+        description: "AWS IAM Role ARN for authentication"
+        required: true
     outputs:
       runtime-infra-scan-result:
         description: "Runtime infrastructure scan result"
