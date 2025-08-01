@@ -109,7 +109,8 @@ resource "aws_iam_role_policy" "ecs_task_policy" {
 # ==============================================================================
 # SECURITY GROUP
 # ==============================================================================
-
+# Note from the SRE team: if you need to reference the VPC CIDR use this data:
+#   `data.aws_vpc.existing.cidr_block`
 
 resource "aws_security_group" "ecs_tasks" {
   name_prefix = "${var.app_name}-ecs-"
@@ -124,21 +125,6 @@ resource "aws_security_group" "ecs_tasks" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  egress {
-    description = "HTTPS outbound"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    description = "HTTP outbound"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
 
   tags = {
     Name = "${var.app_name}-ecs-sg"
