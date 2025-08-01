@@ -32,7 +32,7 @@ jobs:
     if: github.event.issue.pull_request && contains(github.event.comment.body, '/ai-review')
     runs-on: ubuntu-latest
     name: AI-powered Security Review
-    
+
     steps:
       - name: React to comment
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
@@ -49,15 +49,16 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: AI Security Review with Gemini
         uses: google-gemini/gemini-cli-action@66b02172598d8f25de3a0101b50ef368af182aeb # latest commit as of July 18, 2025
         with:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           prompt: |
-            You are an expert in CI/CD security and DevSecOps practices. 
+            You are an expert in CI/CD security and DevSecOps practices.
             Please review this pull request focusing on:
-            
+
             1. Security vulnerabilities in the code changes
             2. CI/CD pipeline security best practices
             3. Infrastructure as Code (IaC) security issues
@@ -66,17 +67,17 @@ jobs:
             6. Dependency and supply chain security
             7. Access control and permissions
             8. Security scanning and compliance gaps
-            
+
             Provide a comprehensive security review with:
             - Identified security issues (if any)
             - Risk assessment (High/Medium/Low)
             - Specific recommendations for fixes
             - Best practices suggestions
-            
+
             Focus on actionable feedback that helps improve the security posture of this CI/CD pipeline.
-            
+
             Analyze the changes in this pull request using git diff to examine the actual changes made.
-            
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -85,17 +86,17 @@ jobs:
         with:
           script: |
             const comment = `## 🤖 AI Security Review Results
-            
+
             The AI security scan has been completed! 🚀
-            
+
             **Triggered by:** @${{ github.event.comment.user.login }}
             **Command:** \`${{ github.event.comment.body }}\`
-            
+
             > 💡 **Note:** Detailed analysis is currently logged in the workflow. Soon we'll display the full review here!
-            
+
             Check the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for complete details.
             `;
-            
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
