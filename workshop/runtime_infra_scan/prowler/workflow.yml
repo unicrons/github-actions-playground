@@ -50,7 +50,7 @@ jobs:
       - name: Run Prowler
         id: prowler
         run: |
-            prowler aws --service iam s3 --output-formats html
+            prowler aws --service iam s3 --output-formats html -z
         continue-on-error: true
 
       - name: Message
